@@ -1,0 +1,16 @@
+{
+  "name": "djs",
+  "version": "0.1.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "discord.js": "^12.1.1",
+    "moment": "^2.26.0",
+    "ms": "^2.1.2"
+  }
+}
