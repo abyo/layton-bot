@@ -24,7 +24,6 @@ module.exports = async (client, message) => {
 
   if (!message.content.startsWith(client.config.PREFIX)) return;
   
-
   const args = message.content.slice(client.config.PREFIX.length).split(/ +/);
   const commandName = args.shift().toLowerCase();
   const user = message.mentions.users.first();

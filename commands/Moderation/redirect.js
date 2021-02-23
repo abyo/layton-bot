@@ -1,4 +1,3 @@
-const { MESSAGES } = require("../../util/constants");
 const { MessageEmbed } = require("discord.js");
 
 module.exports.run = (client, message, args) => {
@@ -20,4 +19,14 @@ module.exports.run = (client, message, args) => {
   message.delete();
 };
 
-module.exports.help = MESSAGES.COMMANDS.MODERATION.REDIRECT;
+module.exports.help = {
+  name: "redirect",
+  aliases: ['redirect', 'rdct'],
+  category: 'moderation',
+  description: "Redirige un message d'un salon à un autre et notifie l'utilisateur",
+  cooldown: 1,
+  usage: '<message_id> <#salon_de_redirection>',
+  isUserAdmin: false,
+  permissions: true,
+  args: true
+};

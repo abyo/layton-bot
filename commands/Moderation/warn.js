@@ -1,4 +1,3 @@
-const { MESSAGES } = require("../../util/constants");
 const { MessageEmbed } = require("discord.js");
 
 const isFirstCharNumeric = c => /\d/.test(c);
@@ -23,4 +22,14 @@ module.exports.run = async (client, message, args) => {
   client.channels.cache.get('812654959261777940').send(embed);
 };
 
-module.exports.help = MESSAGES.COMMANDS.MODERATION.WARN;
+module.exports.help = {
+  name: "warn",
+  aliases: ['warn'],
+  category: 'moderation',
+  description: "Avertir un utilisateur et le message",
+  cooldown: 1,
+  usage: '<@user> [<message_id>] [<raison>]',
+  isUserAdmin: true,
+  permissions: true,
+  args: true
+};

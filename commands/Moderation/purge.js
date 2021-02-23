@@ -1,4 +1,3 @@
-const { MESSAGES } = require("../../util/constants");
 const { MessageEmbed } = require("discord.js");
 
 module.exports.run = async (client, message, args) => {
@@ -20,4 +19,14 @@ module.exports.run = async (client, message, args) => {
   client.channels.cache.get('812654959261777940').send(embed);
 };
 
-module.exports.help = MESSAGES.COMMANDS.MODERATION.PURGE;
+module.exports.help = {
+  name: "purge",
+  aliases: ['purge'],
+  category: 'moderation',
+  description: "Purge un nombre de message spécifié",
+  cooldown: 1,
+  usage: '<nbr_messages>',
+  isUserAdmin: false,
+  permissions: true,
+  args: true
+};
