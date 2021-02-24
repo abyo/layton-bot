@@ -3,7 +3,7 @@ const { Collection, MessageEmbed } = require('discord.js');
 module.exports = async (client, message) => {
   if (message.author.bot) return;
   
-  if (message.channel.id == "812735790357938176") {
+  if (message.channel.id == "812735790357938176" && !message.content.startsWith("?")) {
     message.delete();
     const embed = new MessageEmbed()
       .setTitle(`Nouvelle suggestion! ${message.author.username} (${(message.author.id)})`)
