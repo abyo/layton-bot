@@ -1,11 +1,13 @@
 const { MessageEmbed } = require("discord.js");
 
 module.exports.run = (client, message, args) => {
+  let reason = args.splice(1).join(" ") || "Aucune raison spécifiée";
   message.channel.messages.fetch(args[0]).then((msg) => {
     const suggestionToEdit = msg.embeds[0];
     const refusedSugestion = new MessageEmbed(suggestionToEdit)
       .setTitle(`${suggestionToEdit.title} - refusée par les CM.`)
-      .setColor("RED");
+      .setColor("RED")
+      .addField("Raison du refus : ", reason);
     msg.edit(refusedSugestion);
     msg.reactions.removeAll();
   });
