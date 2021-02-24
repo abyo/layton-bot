@@ -6,7 +6,7 @@ module.exports.run = (client, message, args) => {
     const suggestionToEdit = msg.embeds[0];
     const refusedSugestion = new MessageEmbed(suggestionToEdit)
       .setTitle(`${suggestionToEdit.title} - refusée par les CM.`)
-      .setColor("RED")
+      .setColor("#dc143c")
       .addField("Raison du refus : ", reason);
     msg.edit(refusedSugestion);
     msg.reactions.removeAll();

@@ -5,7 +5,7 @@ module.exports.run = (client, message, args) => {
     const suggestionToEdit = msg.embeds[0];
     const acceptedSugestion = new MessageEmbed(suggestionToEdit)
       .setTitle(`${suggestionToEdit.title} - acceptée par les CM.`)
-      .setColor("GREEN");
+      .setColor("#2ba0ff");
     msg.edit(acceptedSugestion);
     msg.reactions.removeAll();
   });
