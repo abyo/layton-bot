@@ -33,6 +33,13 @@ module.exports = async (client, message) => {
 
   if (command.help.permissions && !message.member.hasPermission('BAN_MEMBERS')) return message.reply("tu n'as pas les permissions pour taper cette commande.");
 
+  if (
+    command.help.adminOnly &&
+    !message.member.roles.cache.has("812048872003076096")
+  ) {
+    return message.reply("Seuls les CM peuvent utiliser cette commande.");
+  }
+
   if (command.help.args && !args.length) {
     let noArgsReply = `Il nous faut des arguments pour cette commande, ${message.author}!`;
 
