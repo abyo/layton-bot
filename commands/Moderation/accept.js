@@ -20,6 +20,7 @@ module.exports.help = {
   cooldown: 1,
   usage: "<message_id>",
   isUserAdmin: false,
+  adminOnly: true,
   permissions: true,
   args: true,
 };

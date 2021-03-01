@@ -2,9 +2,10 @@ const { MessageEmbed } = require("discord.js");
 
 module.exports.run = (client, message, args) => {
   let user = message.guild.member(message.mentions.users.first());
-  let muteRole = message.guild.roles.cache.find(r => r.name === 'muted');
+  let muteRole = message.guild.roles.cache.find((r) => r.name === "muted");
 
-  if (!user.roles.cache.has(muteRole.id)) return message.reply("l'utilisateur mentionné n'est pas muté!");
+  if (!user.roles.cache.has(muteRole.id))
+    return message.reply("l'utilisateur mentionné n'est pas muté!");
   user.roles.remove(muteRole.id);
   message.channel.send(`<@${user.id}> n'est plus muté!`);
 
@@ -14,18 +15,19 @@ module.exports.run = (client, message, args) => {
     .setDescription(`**Action**: unmute`)
     .setTimestamp()
     .setFooter(message.author.username, message.author.avatarURL());
-    
-  client.channels.cache.get('812654959261777940').send(embed);
+
+  client.channels.cache.get("812654959261777940").send(embed);
 };
 
 module.exports.help = {
   name: "unmute",
-  aliases: ['unmute'],
-  category: 'moderation',
+  aliases: ["unmute"],
+  category: "moderation",
   description: "Unmute un utilisateur",
   cooldown: 1,
-  usage: '<@user>',
+  usage: "<@user>",
   isUserAdmin: false,
+  adminOnly: false,
   permissions: true,
-  args: true
+  args: true,
 };

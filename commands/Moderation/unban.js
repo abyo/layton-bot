@@ -13,18 +13,19 @@ module.exports.run = async (client, message, args) => {
     .setDescription(`**Action**: unban`)
     .setTimestamp()
     .setFooter(message.author.username, message.author.avatarURL());
-    
-  client.channels.cache.get('812654959261777940').send(embed);
+
+  client.channels.cache.get("812654959261777940").send(embed);
 };
 
 module.exports.help = {
   name: "unban",
-  aliases: ['unban'],
-  category: 'moderation',
+  aliases: ["unban"],
+  category: "moderation",
   description: "Unban un utilisateur",
   cooldown: 1,
-  usage: '<user_id>',
+  usage: "<user_id>",
   isUserAdmin: false,
+  adminOnly: false,
   permissions: true,
-  args: true
+  args: true,
 };
