@@ -30,7 +30,8 @@ module.exports.run = async (client, message, args) => {
     .setTimestamp()
     .setFooter("Cette commande est inutilement difficile!");
 
-  client.channels.cache.get("812654959261777940").send(embed);
+  client.channels.cache.get("819666347617026089").send(embed);
+  message.delete();
 };
 
 module.exports.help = {
