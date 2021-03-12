@@ -14,7 +14,18 @@ module.exports.run = async (client, message, args) => {
     .setTimestamp()
     .setFooter(message.author.username, message.author.avatarURL());
 
-  client.channels.cache.get("819666347617026089").send(embed);
+    const publicEmbed = new MessageEmbed()
+    .setAuthor(`${user.tag} | Unban`, user.displayAvatarURL())
+    .setThumbnail(user.displayAvatarURL())
+    .addFields(
+      { name: "Utilisateur", value: user.username, inline: true },
+      { name: "ID", value: user.id, inline: true },
+    )
+    .setTimestamp()
+    .setFooter(`Deban par ${message.author.username}`, message.author.displayAvatarURL());
+
+  client.channels.cache.get("812654959261777940").send(embed);
+  client.channels.cache.get("819666347617026089").send(publicEmbed);
 };
 
 module.exports.help = {
