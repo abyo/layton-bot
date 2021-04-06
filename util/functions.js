@@ -1,3 +1,5 @@
+const fs = require("fs");
+
 let warningMessagePubStatus = (member, sendInGuild = Boolean(true)) => {
   return sendInGuild //si on doit l'envoyer dans la guild alors on adapte le message pour être sûr que l'utilisateur reçoive le message
     ? `Hello ${member} c'est moi Bernard,\nJe t'envoie ce message car mes esclaves humains ont vu que tu avais une pub dans le statut et un caractère spécial pour remonter en haut de la liste des membres.\nDu coup je t'ai renommé \`${member.displayName.replace(
@@ -12,12 +14,12 @@ let warningMessagePubStatus = (member, sendInGuild = Boolean(true)) => {
 
 module.exports = (client) => {
   client.detectStatus = async (member) => {
-    let bdd = JSON.parse(await fs.readFileSync("./bdd_pub.json"));
+    let bdd = await JSON.parse(await fs.readFileSync("./bdd_pub.json"));
     const status = member.presence.activities[0];
     if (status && status.type === "CUSTOM_STATUS") {
       //détecte le custom status
       const statusValues = status.state.split(/ +/);
-      for await(const value of statusValues) {
+      for await (const value of statusValues) {
         // on test chaque "mot" dans le status
         if (!value.match("dsc.bio/")) {
           //permet d'autoriser les liens dcs.bio
@@ -27,7 +29,8 @@ module.exports = (client) => {
             ) &&
             member.displayName.match(/^\W/)
           ) {
-            if (bdd.users.includes[member.user.id]) {
+            if (bdd.users.includes(member.user.id)) {
+              console.log("users already had a pub warn");
               client.channels.fetch("812654959261777940").then((logChannel) => {
                 logChannel.send(
                   `notre cher ${member.user} n'a pas compris la première fois et a remis une pub dans son statut...`
