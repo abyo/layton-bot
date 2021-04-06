@@ -7,5 +7,11 @@ client.config = require("./config");
 
 loadCommands(client);
 loadEvents(client);
+require("./util/functions")(client);
+
+//créé le fichier local permettant de se souvenir des gens qui ont déjà été prévenu par rapport au statut et aux pubs
+if (!fs.readdirSync(".").includes("bdd_pub.json")) {
+    fs.writeFileSync("bdd_pub.json", JSON.stringify({ users: [] }, null, 4));
+  }
 
 client.login(client.config.TOKEN);
