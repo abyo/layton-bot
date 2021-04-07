@@ -23,7 +23,7 @@ module.exports.run = (client, message, args) => {
       { name: "ID", value: user.id, inline: true },
       {
         name: "Raison",
-        value: reason,
+        value: banReason,
       }
     )
     .setTimestamp()
