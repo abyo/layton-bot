@@ -7,7 +7,7 @@ module.exports.run = (client, message, args) => {
   );
   message.channel.messages.fetch(args[0]).then((msg) => {
     message.channel.send(
-      `<@${msg.author.id}>, ton message a été redirigé vers le salon -> ${channel}. Si tu ne vois pas le salon, direction #roles.`
+      `<@${msg.author.id}>, ton message a été redirigé vers le salon -> ${channel}. Si tu ne vois pas le salon, direction <@&811949160538177556>.`
     );
 
     const embed = new MessageEmbed()
