@@ -2,7 +2,7 @@ const fs = require("fs");
 
 let warningMessagePubStatus = (member, sendInGuild = Boolean(true)) => {
   let newMemberDisplayName = member.displayName.replace(/^[^a-zA-Z0-9]+/gi, "");
-  if(newMemberDisplayName.length == 0){
+  if (newMemberDisplayName.length == 0) {
     newMemberDisplayName = "Placeholder";
   }
 
@@ -17,6 +17,9 @@ module.exports = (client) => {
     const status = member.presence.activities[0];
     if (status && status.type === "CUSTOM_STATUS") {
       //détecte le custom status
+      if (!status.state) {
+        return;
+      }
       const statusValues = status.state.split(/ +/);
       for await (const value of statusValues) {
         // on test chaque "mot" dans le status
@@ -41,7 +44,10 @@ module.exports = (client) => {
             } else {
               bdd.users.push(member.user.id);
               fs.writeFileSync("./bdd_pub.json", JSON.stringify(bdd, null, 4));
-              let newNickname = member.displayName.replace(/^[^a-zA-Z0-9]+/gi, "");
+              let newNickname = member.displayName.replace(
+                /^[^a-zA-Z0-9]+/gi,
+                ""
+              );
               member.setNickname(
                 newNickname.length != 0 ? newNickname : "Placeholder"
               );
