@@ -13,8 +13,6 @@ loadCommands(client);
 loadEvents(client);
 require("./util/functions")(client);
 
-//créé le fichier local permettant de se souvenir des gens qui ont déjà été prévenu par rapport au statut et aux pubs
-
 if (!readdirSync(".").includes("bdd_pub.json")) {
   writeFileSync("bdd_pub.json", JSON.stringify({ users: [] }, null, 4));
 }
