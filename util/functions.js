@@ -27,7 +27,7 @@ module.exports = (client) => {
           //permet d'autoriser les liens dcs.bio
           if (
             value.match(
-              /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/
+              /(discord)?\.gg\/.+|http(s)?:\/\/.+\.(com|fr|ru|xyz|ptdr|net|be|ch|es)|w{3}\..+\.(com|fr|ru|xyz|ptdr|net|be|ch|es)|.+\.(com|fr|ru|xyz|ptdr|net|be|ch|es)/gm
             ) &&
             member.displayName.match(/^[^a-zA-Z0-9].+$/)
           ) {
