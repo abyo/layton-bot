@@ -35,9 +35,9 @@ module.exports = async (client, message) => {
 
   if (
     command.help.adminOnly &&
-    !message.member.roles.cache.has("812048872003076096")
+    !message.member.roles.cache.has("812048910344257566")
   ) {
-    return message.reply("Seuls les CM peuvent utiliser cette commande.");
+    return message.reply("Seuls les modérateurs peuvent utiliser cette commande.");
   }
 
   if (command.help.args && !args.length) {

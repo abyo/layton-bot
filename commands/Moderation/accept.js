@@ -4,7 +4,7 @@ module.exports.run = (client, message, args) => {
   message.channel.messages.fetch(args[0]).then((msg) => {
     const suggestionToEdit = msg.embeds[0];
     const acceptedSugestion = new MessageEmbed(suggestionToEdit)
-      .setTitle(`${suggestionToEdit.title} - acceptée par les CM.`)
+      .setTitle(`${suggestionToEdit.title} - acceptée par les modérateurs.`)
       .setColor("#2ba0ff");
     msg.edit(acceptedSugestion);
     msg.reactions.removeAll();

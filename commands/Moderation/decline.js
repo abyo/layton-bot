@@ -5,7 +5,7 @@ module.exports.run = (client, message, args) => {
   message.channel.messages.fetch(args[0]).then((msg) => {
     const suggestionToEdit = msg.embeds[0];
     const refusedSugestion = new MessageEmbed(suggestionToEdit)
-      .setTitle(`${suggestionToEdit.title} - refusée par les CM.`)
+      .setTitle(`${suggestionToEdit.title} - refusée par les modérateurs.`)
       .setColor("#dc143c")
       .addField("Raison du refus : ", reason);
     msg.edit(refusedSugestion);
