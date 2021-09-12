@@ -1,6 +1,6 @@
 const { MessageEmbed } = require("discord.js");
 
-module.exports.run = (client, message, args) => {
+module.exports.run = (_client, message, args) => {
   const numberPattern = /\d+/g;
   const channel = message.guild.channels.cache.get(
     args[1].match(numberPattern).join("")
@@ -16,7 +16,7 @@ module.exports.run = (client, message, args) => {
       .setColor("#dc143c")
       .setFooter(`Venant du salon -> ${message.channel.name}`)
       .setDescription(msg.content);
-    channel.send(embed);
+    channel.send({embeds: [embed]});
     msg.delete();
   });
 
@@ -32,7 +32,6 @@ module.exports.help = {
   cooldown: 1,
   usage: "<message_id> <#salon_de_redirection>",
   isUserAdmin: false,
-  adminOnly: false,
   permissions: true,
   args: true,
 };

@@ -29,7 +29,7 @@ module.exports.run = async (client, message, args) => {
       }
     )
     .setTimestamp()
-    .setFooter("Cette commande est inutilement difficile!");
+    .setFooter("Cette commande est inutilement difficile !");
 
   const publicEmbed = new MessageEmbed()
     .setAuthor(`${user.tag} | Warn`, user.displayAvatarURL())
@@ -47,8 +47,8 @@ module.exports.run = async (client, message, args) => {
     .setTimestamp()
     .setFooter(`Averti par ${message.author.username}`, message.author.displayAvatarURL());
 
-  client.channels.cache.get("812654959261777940").send(embed);
-  client.channels.cache.get("819666347617026089").send(publicEmbed);
+  client.channels.cache.get("812654959261777940").send({embeds: [embed]});
+  client.channels.cache.get("819666347617026089").send({embeds: [publicEmbed]});
   user.send(`Bonjour, vous avez été warn sur \`${message.guild.name}\` pour la raison suivante: \`${isFirstCharNumeric(raison.charAt(0)) ? args.slice(args.indexOf(args[2])).join(" ") : args.slice(args.indexOf(args[1])).join(" ")}\`.`)
     .catch((error) => {
       if (error instanceof DiscordAPIError && error.message == "Cannot send messages to this user") {
@@ -65,9 +65,8 @@ module.exports.help = {
   category: "moderation",
   description: "Avertir un utilisateur et le message",
   cooldown: 1,
-  usage: "<@user> [<message_id>] [<raison>]",
+  usage: "<@user> [message_id] <raison>",
   isUserAdmin: true,
-  adminOnly: false,
   permissions: true,
   args: true,
 };

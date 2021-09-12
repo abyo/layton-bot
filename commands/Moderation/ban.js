@@ -4,7 +4,7 @@ module.exports.run = (client, message, args) => {
   let user = message.mentions.users.first();
   let banReason = args.splice(1).join(" ") || "Aucune raison spécifiée";
   user
-    ? message.guild.member(user).ban({ days: 7, reason: banReason })
+    ? message.guild.bans.create(user, { days: 7, reason: banReason })
     : message.channel.send("L'utilisateur n'existe pas.");
 
   const embed = new MessageEmbed()
@@ -29,8 +29,8 @@ module.exports.run = (client, message, args) => {
     .setTimestamp()
     .setFooter(`Banni par ${message.author.username}`, message.author.displayAvatarURL());
 
-  client.channels.cache.get("812654959261777940").send(embed);
-  client.channels.cache.get("819666347617026089").send(publicEmbed);
+  client.channels.cache.get("812654959261777940").send({embeds: [embed]});
+  client.channels.cache.get("819666347617026089").send({embeds: [publicEmbed]});
 };
 
 module.exports.help = {
@@ -41,7 +41,6 @@ module.exports.help = {
   cooldown: 1,
   usage: "<@user> <raison>",
   isUserAdmin: true,
-  adminOnly: false,
   permissions: true,
   args: true,
 };

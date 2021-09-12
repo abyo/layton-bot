@@ -1,26 +1,26 @@
 const { MessageEmbed } = require("discord.js");
 
 module.exports.run = (client, message, args) => {
-  let user = message.mentions.users.first();
+  let member = message.mentions.members.first();
   let reason = args.splice(1).join(" ") || "Aucune raison spécifiée";
-  user
-    ? message.guild.member(user).kick(reason)
+  member
+    ? member.kick(reason)
     : message.channel.send("L'utilisateur n'existe pas.");
 
   const embed = new MessageEmbed()
-    .setAuthor(`${user.username} (${user.id})`)
+    .setAuthor(`${member.user.username} (${member.user.id})`)
     .setColor("#ffa500")
     .setDescription(`**Action**: kick\n**Raison**: ${reason}`)
-    .setThumbnail(user.avatarURL())
+    .setThumbnail(member.user.avatarURL())
     .setTimestamp()
     .setFooter(message.author.username, message.author.avatarURL());
 
     const publicEmbed = new MessageEmbed()
-    .setAuthor(`${user.tag} | Kick`, user.displayAvatarURL())
-    .setThumbnail(user.displayAvatarURL())
+    .setAuthor(`${member.user.tag} | Kick`, member.user.displayAvatarURL())
+    .setThumbnail(member.user.displayAvatarURL())
     .addFields(
-      { name: "Utilisateur", value: user.username, inline: true },
-      { name: "ID", value: user.id, inline: true },
+      { name: "Utilisateur", value: member.user.username, inline: true },
+      { name: "ID", value: member.user.id, inline: true },
       {
         name: "Raison",
         value: reason,
@@ -29,8 +29,8 @@ module.exports.run = (client, message, args) => {
     .setTimestamp()
     .setFooter(`Kick par ${message.author.username}`, message.author.displayAvatarURL());
 
-  client.channels.cache.get("812654959261777940").send(embed);
-  client.channels.cache.get("819666347617026089").send(publicEmbed);
+  client.channels.cache.get("812654959261777940").send({embeds: [embed]});
+  client.channels.cache.get("819666347617026089").send({embeds: [publicEmbed]});
 };
 
 module.exports.help = {
@@ -41,7 +41,6 @@ module.exports.help = {
   cooldown: 1,
   usage: "<@user> <raison>",
   isUserAdmin: true,
-  adminOnly: false,
   permissions: true,
   args: true,
 };

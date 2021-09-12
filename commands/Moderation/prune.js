@@ -1,9 +1,9 @@
 const { MessageEmbed } = require("discord.js");
 
 module.exports.run = async (client, message, args) => {
-  let user = message.guild.member(message.mentions.users.first());
+  let member = message.mentions.members.first();
   if (isNaN(args[1]) || args[1] < 1 || args[1] > 100)
-    return message.reply("il faut spécifier un ***nombre*** entre 1 et 100!");
+    return message.reply("Il faut spécifier un ***nombre*** entre 1 et 100!");
 
   const messages = (
     await message.channel.messages.fetch({
@@ -11,14 +11,13 @@ module.exports.run = async (client, message, args) => {
       before: message.id,
     })
   )
-    .filter((a) => a.author.id === user.id)
-    .array();
+    .filter((a) => a.author.id === member.id)
 
   messages.length = Math.min(args[1], messages.length);
 
-  if (messages.length === 0 || !user)
+  if (messages.length === 0 || !member)
     return message.reply(
-      "aucun message à supprimer sur cet utilisateur (ou cet utilisateur n'existe pas)."
+      "Aucun message à supprimer sur cet utilisateur (ou cet utilisateur n'existe pas)."
     );
 
   if (messages.length === 1) await messages[0].delete();
@@ -33,7 +32,7 @@ module.exports.run = async (client, message, args) => {
       `**Action**: prune\n**Nbr de messages**: ${args[1]}\n**Utilisateur**: ${args[0]}`
     );
 
-  client.channels.cache.get("812654959261777940").send(embed);
+  client.channels.cache.get("812654959261777940").send({embeds: [embed]});
 };
 
 module.exports.help = {
@@ -45,7 +44,6 @@ module.exports.help = {
   cooldown: 1,
   usage: "<@user> <nbr_messages>",
   isUserAdmin: true,
-  adminOnly: false,
   permissions: true,
   args: true,
 };

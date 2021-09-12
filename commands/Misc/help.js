@@ -15,7 +15,7 @@ module.exports.run = (client, message, args) => {
       );
     };
 
-    return message.channel.send(embed);
+    return message.channel.send({embeds: [embed]});
   } else {
     const command = client.commands.get(args[0]) || client.commands.find(cmd => cmd.help.aliases && cmd.help.aliases.includes(args[0]));
     if (!command) return message.reply("cette commande n'existe pas!");
@@ -25,10 +25,10 @@ module.exports.run = (client, message, args) => {
       .setTitle(`\`${command.help.name}\``)
       .addField("Description", `${command.help.description} (cd: ${command.help.cooldown}secs)`)
       .addField("Utilisation", command.help.usage ? `${client.config.PREFIX}${command.help.name} ${command.help.usage}` : `${client.config.PREFIX}${command.help.name}`, true)
-      .setFooter(`Permission: ${command.help.permissions ? "Modérateur/CM uniquement" : "Tout le monde peut utiliser"}`)
+      .setFooter(`Permission: ${command.help.permissions ? "Modérateur/CM uniquement" : "Tout le monde peut l'utiliser"}`)
 
     if (command.help.aliases.length > 1) embed.addField("Alias", `${command.help.aliases.join(', ')}`, true);
-    return message.channel.send(embed);
+    return message.channel.send({embeds: [embed]});
   }
 };
 

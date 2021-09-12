@@ -1,31 +1,31 @@
 const { MessageEmbed } = require("discord.js");
 
 module.exports.run = async (client, message, args) => {
-  // ?unban 789789788978978
-  // user = client.users.fetch('789789788978978');
-  let user = await client.users.fetch(args[0]);
-  if (!user) return message.reply("l'utilisateur n'existe pas.");
-  message.guild.members.unban(user);
+  let guildBan = await message.guild.bans.fetch(args[0]);
+  const raison = args.splice(1).join(" ") || "Aucune raison spécifiée"
+  if (!guildBan) return message.reply("L'utilisateur n'est pas banni.");
+  message.guild.bans.remove(guildBan.user, raison);
 
   const embed = new MessageEmbed()
-    .setAuthor(`${user.username} (${user.id})`, user.avatarURL())
+    .setAuthor(`${guildBan.user.username} (${guildBan.user.id})`, guildBan.user.avatarURL())
     .setColor("#35f092")
     .setDescription(`**Action**: unban`)
     .setTimestamp()
     .setFooter(message.author.username, message.author.avatarURL());
 
     const publicEmbed = new MessageEmbed()
-    .setAuthor(`${user.tag} | Unban`, user.displayAvatarURL())
-    .setThumbnail(user.displayAvatarURL())
+    .setAuthor(`${guildBan.user.tag} | Unban`, guildBan.user.displayAvatarURL())
+    .setThumbnail(guildBan.user.displayAvatarURL())
     .addFields(
-      { name: "Utilisateur", value: user.username, inline: true },
-      { name: "ID", value: user.id, inline: true },
+      { name: "Utilisateur", value: guildBan.user.username, inline: true },
+      { name: "ID", value: guildBan.user.id, inline: true },
+      { name: "Raison", value: raison }
     )
     .setTimestamp()
     .setFooter(`Deban par ${message.author.username}`, message.author.displayAvatarURL());
 
-  client.channels.cache.get("812654959261777940").send(embed);
-  client.channels.cache.get("819666347617026089").send(publicEmbed);
+  client.channels.cache.get("812654959261777940").send({embeds:[embed]});
+  client.channels.cache.get("819666347617026089").send({embeds: [publicEmbed]});
 };
 
 module.exports.help = {
@@ -36,7 +36,6 @@ module.exports.help = {
   cooldown: 1,
   usage: "<user_id>",
   isUserAdmin: false,
-  adminOnly: false,
   permissions: true,
   args: true,
 };
