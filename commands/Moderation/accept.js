@@ -1,26 +1,15 @@
-const { MessageEmbed } = require("discord.js");
-
-module.exports.run = (client, message, args) => {
-  message.channel.messages.fetch(args[0]).then((msg) => {
-    const suggestionToEdit = msg.embeds[0];
-    const acceptedSugestion = new MessageEmbed(suggestionToEdit)
-      .setTitle(`${suggestionToEdit.title} - acceptée par les modérateurs.`)
-      .setColor("#2ba0ff");
-    msg.edit(acceptedSugestion);
-    msg.reactions.removeAll();
-  });
-  message.delete();
+module.exports.run = (_client, message) => {
+  message.reply("Pour accepter une suggestion, il suffit maintenant de réagir avec ✅ sous la suggestion que vous souhaiter accepter.")
 };
 
 module.exports.help = {
   name: "accept",
   aliases: ["accept"],
   category: "moderation",
-  description: "Accepter une suggestion.",
+  description: "Pour accepter une suggestion, il suffit maintenant de réagir avec ✅ sous la suggestion que vous souhaiter accepter.",
   cooldown: 1,
-  usage: "<message_id>",
+  usage: "Réagissez simplement sous la suggestion par ✅.",
   isUserAdmin: false,
-  adminOnly: true,
   permissions: true,
-  args: true,
+  args: false,
 };

@@ -1,28 +1,15 @@
-const { MessageEmbed } = require("discord.js");
-
-module.exports.run = (client, message, args) => {
-  let reason = args.splice(1).join(" ") || "Aucune raison spécifiée";
-  message.channel.messages.fetch(args[0]).then((msg) => {
-    const suggestionToEdit = msg.embeds[0];
-    const refusedSugestion = new MessageEmbed(suggestionToEdit)
-      .setTitle(`${suggestionToEdit.title} - refusée par les modérateurs.`)
-      .setColor("#dc143c")
-      .addField("Raison du refus : ", reason);
-    msg.edit(refusedSugestion);
-    msg.reactions.removeAll();
-  });
-  message.delete();
+module.exports.run = (_client, message) => {
+  message.reply("Pour refuser une suggestion, il suffit maintenant de réagir avec ❌ sous la suggestion concernée, puis d'indiquer la raison par écrit lorsque le bot vous le demande.")
 };
 
 module.exports.help = {
   name: "decline",
   aliases: ["decline"],
   category: "moderation",
-  description: "Decliner une suggestion.",
+  description: "Pour refuser une suggestion, il vous suffit de réagir avec ❌ sous la suggestion concernée, puis d'indiquer la raison par écrit lorsque le bot vous le demande.",
   cooldown: 1,
-  usage: "<message_id>",
+  usage: "Réagissez simplement sous la suggestion par ❌.",
   isUserAdmin: false,
-  adminOnly: true,
   permissions: true,
-  args: true,
+  args: false,
 };

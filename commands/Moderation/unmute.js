@@ -5,7 +5,7 @@ module.exports.run = (client, message, args) => {
   let muteRole = message.guild.roles.cache.find((r) => r.name === "muted");
 
   if (!user.roles.cache.has(muteRole.id))
-    return message.reply("l'utilisateur mentionné n'est pas muté!");
+    return message.reply("L'utilisateur mentionné n'est pas muté!");
   user.roles.remove(muteRole.id);
   message.channel.send(`<@${user.id}> n'est plus muté!`);
 
@@ -26,8 +26,8 @@ module.exports.run = (client, message, args) => {
     .setTimestamp()
     .setFooter(`Unmute par ${message.author.username}`, message.author.displayAvatarURL());
 
-  client.channels.cache.get("812654959261777940").send(embed);
-  client.channels.cache.get("819666347617026089").send(publicEmbed);
+  client.channels.cache.get("812654959261777940").send({embeds: [embed]});
+  client.channels.cache.get("819666347617026089").send({embeds: [publicEmbed]});
 };
 
 module.exports.help = {
@@ -38,7 +38,6 @@ module.exports.help = {
   cooldown: 1,
   usage: "<@user>",
   isUserAdmin: false,
-  adminOnly: false,
   permissions: true,
   args: true,
 };
