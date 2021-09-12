@@ -6,7 +6,8 @@ module.exports = async (_client, messageReaction, user) => {
     if (messageReaction.message.channel.id !== '812735790357938176') return
     if (['👍', '👎'].includes(messageReaction._emoji.name)) return
 
-    const author = messageReaction.message.embeds[0].author.name.split(' ').pop().replace('(', '').replace(')', '')
+    let author = undefined
+    if (messageReaction.message.embeds[0].author) author = messageReaction.message.embeds[0].author.name.split(' ').pop().replace('(', '').replace(')', '')
     if (author === user.id && messageReaction._emoji.name === '🗑️') return messageReaction.message.delete().catch()
     if (['❌', '✅'].includes(messageReaction._emoji.name)) {
         const member = await messageReaction.message.guild.members.fetch(user.id)
@@ -18,7 +19,8 @@ module.exports = async (_client, messageReaction, user) => {
                     .setColor("#2ba0ff")
                     .setFooter("Cette suggestion sera mise en place prochainement.")
                 messageReaction.message.edit({embeds: [acceptedSugestion]});
-                return messageReaction.message.reactions.removeAll();
+                messageReaction.message.reactions.removeAll()
+                return messageReaction.message.guild.channels.cache.get('812654959261777940').send({embeds: [{title: 'Suggestion acceptée', author: {name: `${message.author.username} (${(message.author.id)})`, iconURL: user.displayAvatarURL()}, description: `[Suggestion acceptée](https://discordapp.com/channels/810091118401552395/812735790357938176/${messageReaction.message.id})`, timestamp: Date.now()}]})
             }
             const message = await messageReaction.message.channel.send(`${user.toString()}, merci d'indiquer la raison du refus de la suggestion :`)
             const filter = (msg) => {
@@ -35,7 +37,8 @@ module.exports = async (_client, messageReaction, user) => {
             messageReaction.message.edit({embeds: [refusedSugestion]});
             collected.first().delete().catch()
             message.delete()
-            return messageReaction.message.reactions.removeAll();
+            messageReaction.message.reactions.removeAll()
+            return messageReaction.message.guild.channels.cache.get('812654959261777940').send({embeds: [{title: 'Suggestion refusée', author: {name: `${message.author.username} (${(message.author.id)})`, iconURL: user.displayAvatarURL()}, description: `[Suggestion refusée](https://discordapp.com/channels/810091118401552395/812735790357938176/${messageReaction.message.id})`, timestamp: Date.now()}]})
         }
     }
     messageReaction.users.remove(user)
