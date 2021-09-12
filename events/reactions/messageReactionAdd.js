@@ -6,7 +6,8 @@ module.exports = async (_client, messageReaction, user) => {
     if (messageReaction.message.channel.id !== '812735790357938176') return
     if (['👍', '👎'].includes(messageReaction._emoji.name)) return
 
-    const author = messageReaction.message.embeds[0].author.name.split(' ').pop().replace('(', '').replace(')', '')
+    let author = undefined
+    if (messageReaction.message.embeds[0].author) author = messageReaction.message.embeds[0].author.name.split(' ').pop().replace('(', '').replace(')', '')
     if (author === user.id && messageReaction._emoji.name === '🗑️') return messageReaction.message.delete().catch()
     if (['❌', '✅'].includes(messageReaction._emoji.name)) {
         const member = await messageReaction.message.guild.members.fetch(user.id)
