@@ -27,7 +27,7 @@ export default class HelpCommand extends Command {
 		{ command }: { command: Command },
 	) {
 		message.delete();
-		const prefix = ';';
+		const prefix = client.config.prefix;
 		if (!command) {
 			const embed = new MessageEmbed().setColor('#36393F').addField(
 				'Commandes',
