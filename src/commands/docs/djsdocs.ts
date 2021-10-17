@@ -1,6 +1,3 @@
-// @ts-nocheck
-// TODO: Fix TS errors
-
 import { Command } from 'discord-akairo';
 import { Message } from 'discord.js';
 import fetch from 'node-fetch';
