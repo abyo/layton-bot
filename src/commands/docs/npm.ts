@@ -8,7 +8,7 @@ export default class NpmCommand extends Command {
 			aliases: ['npm'],
 			category: 'docs',
 			description: {
-				content: 'Return NPM documentation embeds',
+				content: 'Renvoie des informations concernant un module npm',
 				usage: '<query>',
 				examples: ['lodash', 'express'],
 			},
@@ -18,7 +18,7 @@ export default class NpmCommand extends Command {
 				{
 					id: 'pkg',
 					prompt: {
-						start: (message: Message) => `${message.author}, what are you looking for?`,
+						start: (message: Message) => `${message.author}, qu'est ce que vous cherchez?`,
 					},
 					match: 'content',
 					type: (_, pkg) => (pkg ? encodeURIComponent(pkg.replace(/ /g, '-')) : null),

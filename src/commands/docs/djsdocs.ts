@@ -20,7 +20,7 @@ export default class DjsDocsCommand extends Command {
 		super('djsdocs', {
 			aliases: ['djsdocs', 'dd'],
 			description: {
-				content: 'Return DJS documentation embeds',
+				content: 'Renvoie un embed de la documentation de djs',
 				usage: '<query>',
 				examples: ['TextChannel', 'Client', 'ClientUser#setActivity --src=master'],
 			},
@@ -32,7 +32,6 @@ export default class DjsDocsCommand extends Command {
 		});
 	}
 
-  // 
 	public *args() {
 		const defaultDocs = yield {
 			match: 'option',
@@ -58,7 +57,7 @@ export default class DjsDocsCommand extends Command {
 			match: 'rest',
 			type: 'lowercase',
 			prompt: {
-				start: (message: Message) => `${message.author}, what are you looking for?`,
+				start: (message: Message) => `${message.author}, qu'est ce que vous cherchez?`,
 				optional: defaultDocs ? true : false,
 			},
 		};
