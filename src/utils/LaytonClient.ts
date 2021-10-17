@@ -3,9 +3,9 @@ import { Intents,	Message, Snowflake } from 'discord.js';
 import { Config } from './Config';
 import path from 'path';
 
-declare global { var client: PlaceClient; }
+declare global { var client: LaytonClient; }
 
-export class PlaceClient<Ready extends boolean = boolean> extends AkairoClient<Ready> {
+export class LaytonClient<Ready extends boolean = boolean> extends AkairoClient<Ready> {
 	public config: Config;
 	public listenerHandler: ListenerHandler;
 	public commandHandler: CommandHandler;

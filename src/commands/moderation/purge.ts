@@ -28,21 +28,21 @@ export default class PurgeCommand extends Command {
     const logChannel = client.channels.cache.get(client.config.channels.log);
     if (isNaN(messageToDelete) || messageToDelete < 1 || messageToDelete > 100) return message.reply("Il faut spécifier un ***nombre*** entre 1 et 100 !");
 
-  const messages = await message.channel.messages.fetch({
-    limit: Math.min(messageToDelete, 100),
-    before: message.id,
-  });
+		const messages = await message.channel.messages.fetch({
+			limit: Math.min(messageToDelete, 100),
+			before: message.id,
+		});
 
-  message.delete();
-  await (message.channel as TextChannel).bulkDelete(messages);
+		message.delete();
+		await (message.channel as TextChannel).bulkDelete(messages);
 
-  const embed = new MessageEmbed()
-    .setAuthor(message.author.username, message.author.displayAvatarURL())
-    .setColor("#287db5")
-    .setDescription(
-      `**Action**: purge\n**Nbr de messages**: ${messageToDelete}\n**Salon**: ${message.channel}`
-    );
+		const embed = new MessageEmbed()
+			.setAuthor(message.author.username, message.author.displayAvatarURL())
+			.setColor("#287db5")
+			.setDescription(
+				`**Action**: purge\n**Nbr de messages**: ${messageToDelete}\n**Salon**: ${message.channel}`
+			);
 
-    return (logChannel as TextChannel).send({embeds: [embed]});
+		return (logChannel as TextChannel).send({ embeds: [embed] });
 	}
 }

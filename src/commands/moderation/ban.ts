@@ -41,6 +41,6 @@ export default class BanCommand extends Command {
       .setTimestamp()
       .setFooter(`Banni par ${message.author.username}`, message.author.displayAvatarURL());
 
-    return (logChannel as TextChannel).send({embeds: [embed]});
+    return (logChannel as TextChannel).send({ embeds: [embed] });
 	}
 }

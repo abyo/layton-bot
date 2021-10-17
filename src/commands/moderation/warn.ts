@@ -44,6 +44,6 @@ export default class WarnCommand extends Command {
       .setTimestamp()
 
 
-    return (logChannel as TextChannel).send({embeds: [embed]});
+    return (logChannel as TextChannel).send({ embeds: [embed] });
 	}
 }

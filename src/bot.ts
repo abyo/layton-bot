@@ -1,5 +1,5 @@
 import config from './config/options';
-import { PlaceClient } from './utils/LaytonClient';
+import { LaytonClient } from './utils/LaytonClient';
 
-const client = new PlaceClient(config);
+const client = new LaytonClient(config);
 void client.start(); 

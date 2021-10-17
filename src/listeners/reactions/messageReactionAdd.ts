@@ -71,18 +71,17 @@ export default class MessageReactionAddListener extends Listener {
 				});
 				const suggestionToEdit = messageReaction.message.embeds[0];
 				const refusedSugestion = new MessageEmbed(suggestionToEdit)
-				.setTitle(`Suggestion refusée par les modérateurs.`)
-				.setColor('#dc143c')
-				.addField('Raison du refus : ', collected.first().content)
-				.setFooter('Cette suggestion a été rejetée par le staff.');
+					.setTitle(`Suggestion refusée par les modérateurs.`)
+					.setColor('#dc143c')
+					.addField('Raison du refus : ', collected.first().content)
+					.setFooter('Cette suggestion a été rejetée par le staff.');
 				messageReaction.message.edit({ embeds: [refusedSugestion] });
 				collected.first().delete().catch();
 				message.delete();
 				messageReaction.message.reactions.removeAll();
 				return messageReaction.message.guild.channels.cache
 					.get('820374615427383347')
-					.send({
-						embeds: [
+					.send({ embeds: [
 							{
 								title: 'Suggestion refusée',
 								author: {

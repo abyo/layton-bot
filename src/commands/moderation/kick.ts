@@ -42,6 +42,6 @@ export default class KickCommand extends Command {
       .setTimestamp()
       .setFooter(`Kick par ${message.author.username}`, message.author.displayAvatarURL());
 
-    return (logChannel as TextChannel).send({embeds: [embed]});
+    return (logChannel as TextChannel).send({ embeds: [embed] });
 	}
 }

@@ -14,7 +14,7 @@ export default class MessageCreateListener extends Listener {
 
 	public override async exec(message: Message): Promise<void> {
 		if (message.author.bot) return;
-    if (message.channel.type==='DM') return
+    if (message.channel.type === 'DM') return
     const isModoDecliningSuggestion = async (message: Message) => {
       const messageBefore = await message.channel.messages.fetch({limit: 1, before: message.id})
       if (!messageBefore.size) return false;
@@ -22,8 +22,9 @@ export default class MessageCreateListener extends Listener {
       const isTheRightModo = messageBefore.first().content && messageBefore.first().mentions.users.size && message.author.id === messageBefore.first().mentions.users.first().id
       return isTheRightModo && isDecliningSuggestion
     }
+    
     const boolean = await isModoDecliningSuggestion(message)
-    if(boolean) return
+    if (boolean) return
 
     if (message.channel.id == "895675882348351509" && !message.content.startsWith(";")) {
       message.delete();
@@ -42,7 +43,7 @@ export default class MessageCreateListener extends Listener {
     }
 
     if (message.channel.id == "812757333431550034") {
-      if (!message.content.startsWith(";") || !message.content.startsWith("?")) message.delete();
+      if (!message.content.startsWith(";")) message.delete();
     }
 	}
 }

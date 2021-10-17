@@ -22,10 +22,7 @@ export default class HelpCommand extends Command {
 		});
 	}
 
-	public override async exec(
-		message: Message,
-		{ command }: { command: Command },
-	) {
+	public override async exec(message: Message, { command }: { command: Command }) {
 		message.delete();
 		const prefix = client.config.prefix;
 		if (!command) {
@@ -59,6 +56,7 @@ export default class HelpCommand extends Command {
 
 		if (command.aliases.length > 1)
 			embed.addField('Aliases', `\`${command.aliases.join('` `')}\``, true);
+
 		if (command.description.examples && command.description.examples.length)
 			embed.addField(
 				'Exemples',
