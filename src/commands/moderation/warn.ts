@@ -23,7 +23,6 @@ export default class WarnCommand extends Command {
 					match: 'restContent'
 				},
 			],
-      // TODO: modify permissions
 			clientPermissions: ['BAN_MEMBERS'],
 			userPermissions: ['BAN_MEMBERS']
 		});

@@ -1,9 +1,9 @@
 {
   "name": "place",
   "version": "0.1.0",
-  "description": "Placeholder.",
+  "description": "Layton.",
   "main": "dist/bot.js",
-  "repository": "https://github.com/abyo/place-bot",
+  "repository": "hhttps://github.com/abyo/bernard-bot",
   "author": "a6yo#4744 (@abyo)",
   "license": "MIT",
   "scripts": {

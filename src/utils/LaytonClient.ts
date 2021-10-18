@@ -38,13 +38,13 @@ export class LaytonClient<Ready extends boolean = boolean> extends AkairoClient<
 			commandUtilLifetime: 3e5,
 			argumentDefaults: {
 				prompt: {
-					start: 'If you see this, contact a6yo#4744.',
-					retry: 'If you see this, contact a6yo#4744.',
-					modifyStart: (_: Message, str: string): string => `${str}\n\n Type \`cancel\` to cancel the command`,
-					modifyRetry: (_: Message, str: string): string => `${str}\n\n Type \`cancel\` to cancel the command`,
-					timeout: 'You took too long the command has been cancelled',
-					ended: 'You exceeded the maximum amount of tries the command has been cancelled',
-					cancel: 'The command has been cancelled',
+					start: 'Si vous voyez ce message, contactez a6yo#4744.',
+					retry: 'Si vous voyez ce message, contactez a6yo#4744.',
+					modifyStart: (_: Message, str: string): string => `${str}\n\n Tapez \`cancel\` pour annuler la commande`,
+					modifyRetry: (_: Message, str: string): string => `${str}\n\n Tapez \`cancel\` pour annuler la commande`,
+					timeout: 'Vous avez pris trop de temps pour répondre, la commande est annulée.',
+					ended: 'Vous avez dépassé le nombre maximum d\'essais, la commande a été annulée.',
+					cancel: 'La commande a été annulée.',
 					retries: 3,
 					time: 3e4
 				},
