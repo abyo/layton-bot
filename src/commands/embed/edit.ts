@@ -1,5 +1,5 @@
 import { Command } from 'discord-akairo';
-import { Message, Snowflake } from 'discord.js';
+import { Message } from 'discord.js';
 
 export default class EditCommand extends Command {
 	public constructor() {

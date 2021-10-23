@@ -1,5 +1,5 @@
 import { Command } from 'discord-akairo';
-import { Message, MessageEmbed, TextChannel, User } from 'discord.js';
+import { GuildMember, Message, MessageEmbed, TextChannel, User } from 'discord.js';
 
 export default class KickCommand extends Command {
 	public constructor() {
@@ -14,8 +14,8 @@ export default class KickCommand extends Command {
 			},
 			args: [
 				{
-					id: 'user',
-				  type: 'user'
+					id: 'member',
+				  type: 'member'
 				},
 				{
 					id: 'reason',
@@ -28,15 +28,14 @@ export default class KickCommand extends Command {
 		});
 	}
 
-	public override async exec(message: Message, { user, reason }: { user: User, reason: string }): Promise<unknown> {
+	public override async exec(message: Message, { member, reason }: { member: GuildMember, reason: string }): Promise<unknown> {
     const logChannel = client.channels.cache.get(client.config.channels.log);
-    let member = message.mentions!.members!.first();
 		
     member ? member.kick(reason) : message.channel.send("L'utilisateur n'existe pas.");
     if (!reason) reason = 'Raison non spécifiée';
 
     const embed = new MessageEmbed()
-      .setAuthor(`${user.username} (${user.id})`, user.displayAvatarURL())
+      .setAuthor(`${member.user.username} (${member.user.id})`, member.user.displayAvatarURL())
       .setColor("#dc143c")
       .setDescription(`**Action**: kick\n**Raison**: ${reason}`)
       .setTimestamp()
