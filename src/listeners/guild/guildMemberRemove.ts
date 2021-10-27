@@ -13,7 +13,7 @@ export default class GuildMemberRemoveListener extends Listener {
 	public override async exec(member: GuildMember): Promise<void> {
 		const welcome = client.channels.cache.get(client.config.channels.member) as TextChannel | undefined;
 		const embed = new MessageEmbed()
-			.setDescription(`**${member.user.tag}** a quitté le serveur. Nombre de membres: ${member.guild.memberCount - 1}.`)
+			.setDescription(`**${member.user.tag}** a quitté le serveur. Nombre de membres: ${member.guild.memberCount}.`)
       // TODO: CONSTANT -> Move colors to separate file for re-use
 			.setColor("#dc143c");
 

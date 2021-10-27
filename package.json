@@ -1,9 +1,9 @@
 {
-  "name": "place",
+  "name": "layton",
   "version": "0.1.0",
-  "description": "Layton.",
+  "description": "Layton Bot is a multipurpose moderation bot developed for the discord server of getCodingKnowledge.",
   "main": "dist/bot.js",
-  "repository": "hhttps://github.com/abyo/bernard-bot",
+  "repository": "https://github.com/abyo/layton-bot",
   "author": "a6yo#4744 (@abyo)",
   "license": "MIT",
   "scripts": {
