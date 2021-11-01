@@ -252,6 +252,23 @@ discord-akairo-message-util@NotEnoughUpdates/discord-akairo-message-util:
   languageName: node
   linkType: hard
 
+"layton@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "layton@workspace:."
+  dependencies:
+    "@types/common-tags": ^1.8.1
+    "@types/lodash": ^4.14.175
+    "@types/node": ^16.9.2
+    "@types/node-fetch": 2.5.1
+    common-tags: ^1.8.0
+    discord-akairo: "github:NotEnoughUpdates/discord-akairo"
+    discord.js: ^13.1.0
+    node-fetch: 2.6.0
+    rimraf: ^3.0.2
+    typescript: ^4.4.3
+  languageName: unknown
+  linkType: soft
+
 "lodash.isequal@npm:^4.5.0":
   version: 4.5.0
   resolution: "lodash.isequal@npm:4.5.0"
@@ -336,23 +353,6 @@ discord-akairo-message-util@NotEnoughUpdates/discord-akairo-message-util:
   checksum: 060840f92cf8effa293bcc1bea81281bd7d363731d214cbe5c227df207c34cd727430f70c6037b5159c8a870b9157cba65e775446b0ab06fd5ecc7e54615a3b8
   languageName: node
   linkType: hard
-
-"place@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "place@workspace:."
-  dependencies:
-    "@types/common-tags": ^1.8.1
-    "@types/lodash": ^4.14.175
-    "@types/node": ^16.9.2
-    "@types/node-fetch": 2.5.1
-    common-tags: ^1.8.0
-    discord-akairo: "github:NotEnoughUpdates/discord-akairo"
-    discord.js: ^13.1.0
-    node-fetch: 2.6.0
-    rimraf: ^3.0.2
-    typescript: ^4.4.3
-  languageName: unknown
-  linkType: soft
 
 "rimraf@npm:^3.0.2":
   version: 3.0.2

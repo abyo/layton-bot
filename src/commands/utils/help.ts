@@ -33,6 +33,8 @@ export default class HelpCommand extends Command {
 			);
 
 			for (const category of this.handler.categories.values()) {
+				if (category.id == 'admin' || category.id == 'embed') continue;
+				if (category.id == 'moderation' && !message.member!.roles.cache.some(r => r.name == 'Modérateur')) continue;
 				embed.addField(
 					`${category.id.replace(/(\b\w)/gi, lc => lc.toUpperCase())}`,
 					`${category
