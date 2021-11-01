@@ -35,3 +35,7 @@ dist
 
 # Config file (credentials)
 options.ts
+package-lock.json
+yarn.lock
+/src/commands/admin
+/src/commands/embed
