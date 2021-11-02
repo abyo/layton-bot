@@ -39,3 +39,4 @@ package-lock.json
 yarn.lock
 /src/commands/admin
 /src/commands/embed
+TODO.md

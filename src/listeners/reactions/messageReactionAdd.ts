@@ -15,7 +15,7 @@ export default class MessageReactionAddListener extends Listener {
 	public override async exec(messageReaction: MessageReaction, user: User): Promise<void> {
 		if (user.bot) return;
 		if (messageReaction.partial) await messageReaction.fetch();
-		if (messageReaction.message.channel.id !== '895675882348351509') return;
+		if (messageReaction.message.channel.id !== '812735790357938176') return;
 		if (['👍', '👎'].includes((messageReaction.emoji.name as string))) return;
     
 		let author = undefined;
@@ -49,7 +49,7 @@ export default class MessageReactionAddListener extends Listener {
 										name: `${user.username} (${user.id})`,
 										iconURL: user.displayAvatarURL(),
 									},
-									description: `[Suggestion acceptée](https://discordapp.com/channels/810091118401552395/895675882348351509/${messageReaction.message.id})`,
+									description: `[Suggestion acceptée](https://discordapp.com/channels/810091118401552395/812735790357938176/${messageReaction.message.id})`,
 									timestamp: Date.now(),
 								},
 							],
@@ -88,7 +88,7 @@ export default class MessageReactionAddListener extends Listener {
 									name: `${user.username} (${user.id})`,
 									iconURL: user.displayAvatarURL(),
 								},
-								description: `[Suggestion refusée](https://discordapp.com/channels/810091118401552395/895675882348351509/${messageReaction.message.id})`,
+								description: `[Suggestion refusée](https://discordapp.com/channels/810091118401552395/812735790357938176/${messageReaction.message.id})`,
 								timestamp: Date.now(),
 							},
 						],

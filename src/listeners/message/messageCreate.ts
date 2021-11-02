@@ -26,7 +26,7 @@ export default class MessageCreateListener extends Listener {
     const boolean = await isModoDecliningSuggestion(message)
     if (boolean) return
 
-    if (message.channel.id == "895675882348351509" && !message.content.startsWith(";")) {
+    if (message.channel.id == "812735790357938176" && !message.content.startsWith(";")) {
       message.delete();
       const embed = new MessageEmbed()
         .setTitle(`Nouvelle suggestion !`)
