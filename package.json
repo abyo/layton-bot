@@ -8,13 +8,15 @@
   "license": "MIT",
   "scripts": {
     "build-tsc": "yarn rimraf dist && yarn tsc",
-    "start": "yarn build-tsc && node --trace-warnings dist/bot.js"
+    "start": "yarn build-tsc && node --trace-warnings dist/bot.js",
+    "launch": "./node_modules/.bin/pm2 start dist/bot.js"
   },
   "devDependencies": {
     "@types/common-tags": "^1.8.1",
     "@types/lodash": "^4.14.175",
     "@types/node": "^16.9.2",
-    "@types/node-fetch": "2.5.1"
+    "@types/node-fetch": "2.5.1",
+    "pm2": "^5.1.2"
   },
   "dependencies": {
     "common-tags": "^1.8.0",

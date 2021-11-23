@@ -41,7 +41,7 @@ export default class MessageReactionAddListener extends Listener {
 						.setFooter('Cette suggestion sera mise en place prochainement.');
 					messageReaction.message.edit({ embeds: [acceptedSugestion] });
 					messageReaction.message.reactions.removeAll();
-					return client.channels.cache.get('820374615427383347').send({
+					return client.channels.cache.get('819666347617026089').send({
 							embeds: [
 								{
 									title: 'Suggestion acceptée',
@@ -80,7 +80,7 @@ export default class MessageReactionAddListener extends Listener {
 				message.delete();
 				messageReaction.message.reactions.removeAll();
 				return messageReaction.message.guild.channels.cache
-					.get('820374615427383347')
+					.get('819666347617026089')
 					.send({ embeds: [
 							{
 								title: 'Suggestion refusée',
