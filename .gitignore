@@ -40,3 +40,5 @@ yarn.lock
 /src/commands/admin
 /src/commands/embed
 TODO.md
+/commands/admin
+.env
