@@ -1,3 +1,4 @@
+const { MessageEmbed } = require('discord.js');
 const ms = require('ms');
 
 module.exports = {
@@ -6,11 +7,11 @@ module.exports = {
   permissions: ['MODERATE_MEMBERS'],
   ownerOnly: false,
   usage: 'mute [@member] [duration] [reason]',
-  examples: ['mute @Abyo 4 minutes raison'],
+  examples: ['mute @Abyo 5m raison', 'mute @Abyo 2h raison'],
   description: "Mute un utilisateur temporairement avec une raison",
   options: [
     {
-      name: "target",
+      name: "member",
       description: "L'utilisateur a mute",
       type: "USER",
       required: true
@@ -28,16 +29,27 @@ module.exports = {
       required: true
     }
   ],
-  async runInteraction(client, interaction) {
-    const target = interaction.options.getMember('target');
+  async runInteraction(client, interaction, guildSettings) {
+    const member = interaction.options.getMember('member', true);
     const duration = interaction.options.getString('duration');
     const convertedTime = ms(duration);
     const reason = interaction.options.getString('reason');
+    const logChannel = client.channels.cache.get(guildSettings.modChannel);
 
-    if (!target.moderatable) return interaction.reply('Ce membre ne peut pas être mute par le bot!');
-    if (!convertedTime) return interaction.reply('Spécifier une durée valable!');
+    if (!member) return interaction.reply({ content: "Le membre n'a pas été trouvé!", ephemeral: true });
+    if (!member.moderatable) return interaction.reply({ content: 'Ce membre ne peut pas être mute par le bot!', ephemeral: true });
+    if (!convertedTime) return interaction.reply({ content: 'Spécifier une durée valable!', ephemeral: true });
 
-    target.timeout(convertedTime, reason);
-    interaction.reply(`Le membre ${target} a été mute pour ${duration} car ${reason}!`);
+    const embed = new MessageEmbed()
+      .setAuthor({ name: `${interaction.member.displayName} (${interaction.member.id})`, iconURL: interaction.user.displayAvatarURL() })
+      .setColor('#F79554')
+      .setDescription(`**Membre**: \`${member.user.tag}\` (${member.id})
+      **Action**: Mute
+      **Raison**: ${reason}`)
+      .setTimestamp()
+
+    await logChannel.send({ embeds: [embed] });
+    await interaction.reply({ content: `Le membre ${member} a été mute pour ${duration} car ${reason}!`, ephemeral: true });
+    await member.timeout(convertedTime, reason);
   }
 };

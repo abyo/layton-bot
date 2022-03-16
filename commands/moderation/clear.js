@@ -37,11 +37,11 @@ module.exports = {
       });
 
       await interaction.channel.bulkDelete(filteredTargetMessages, true).then(messages => {
-        interaction.reply(`J'ai supprimé ${messages.size} messages sur l'utilisateur ${target}!`);
+        interaction.reply({ content: `J'ai supprimé ${messages.size} messages sur l'utilisateur ${target}!`, ephemeral: true });
       });
     } else {
       await interaction.channel.bulkDelete(amountToDelete, true).then(messages => {
-        interaction.reply(`J'ai supprimé ${messages.size} messages sur ce salon!`);
+        interaction.reply({ content: `J'ai supprimé ${messages.size} messages sur ce salon!`, ephemeral: true });
       });
     }
   }

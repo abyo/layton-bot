@@ -1,3 +1,5 @@
+const { MessageEmbed } = require('discord.js');
+
 module.exports = {
   name: "kick",
   category: 'moderation',
@@ -8,7 +10,7 @@ module.exports = {
   description: "Kick un utilisateur avec une raison",
   options: [
     {
-      name: "target",
+      name: "member",
       description: "L'utilisateur a kick",
       type: "USER",
       required: true
@@ -20,13 +22,24 @@ module.exports = {
       required: true
     }
   ],
-  async runInteraction(client, interaction) {
-    const target = interaction.options.getMember('target');
+  async runInteraction(client, interaction, guildSettings) {
+    const member = interaction.options.getMember('member', true);
     const reason = interaction.options.getString('reason');
+    const logChannel = client.channels.cache.get(guildSettings.modChannel);
+    
+    if (!member) return interaction.reply({ content: "Le membre n'a pas été trouvé!", ephemeral: true });
+    if (!member.kickable) return interaction.reply({ content: 'Ce membre ne peut pas être kick par le bot!', ephemeral: true });
+    
+    const embed = new MessageEmbed()
+      .setAuthor({ name: `${interaction.member.displayName} (${interaction.member.id})`, iconURL: interaction.user.displayAvatarURL() })
+      .setColor('#FF5C5C')
+      .setDescription(`**Membre**: \`${member.user.tag}\` (${member.id})
+      **Action**: Kick
+      **Raison**: ${reason}`)
+      .setTimestamp()
 
-    if (!target.kickable) return interaction.reply('Ce membre ne peut pas être kick par le bot!');
-
-    target.kick(reason);
-    interaction.reply(`Le membre ${target} a été kick!`);
+    await interaction.reply({ content: `Le membre ${member} a été kick!`, ephemeral: true });
+    await logChannel.send({ embeds: [embed] });
+    await member.kick(reason);
   }
 };
