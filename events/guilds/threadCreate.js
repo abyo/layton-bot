@@ -3,5 +3,5 @@ module.exports = {
   once: false,
   async execute(client, thread) {
     if (thread.isText()) thread.join();
-  }
+  },
 };
