@@ -11,6 +11,8 @@ module.exports = {
       name: "message",
       description: "Le nombre de message à supprimer",
       type: "NUMBER",
+      min_value: 1,
+      max_value: 100,
       required: true
     },
     {
@@ -22,7 +24,6 @@ module.exports = {
   ],
   async runInteraction(client, interaction) {
     const amountToDelete = interaction.options.getNumber('message');
-    if (amountToDelete > 100 || amountToDelete < 2) return interaction.reply('Le \`NOMBRE\` doit être inférieur à 100 et supérieur à 1!');
     const target = interaction.options.getMember('target');
 
     const messagesToDelete = await interaction.channel.messages.fetch();
