@@ -1,40 +1,35 @@
 const { MessageEmbed } = require("discord.js");
 
 module.exports = {
-  name: "ban",
+  name: "unban",
   category: "moderation",
   permissions: ["BAN_MEMBERS"],
   ownerOnly: false,
-  usage: "ban [@member] [reason]",
-  examples: ["ban @Abyo raison"],
-  description: "Bannir un utilisateur avec une raison",
+  usage: "unban [@member_id]",
+  examples: ["unban @member_id"],
+  description: "Débannir un utilisateur avec son id",
   options: [
     {
-      name: "member",
-      description: "L'utilisateur a ban",
-      type: "USER",
+      name: "memberid",
+      description: "L'id de l'utilisateur à déban",
+      type: "STRING",
       required: true,
     },
     {
       name: "reason",
-      description: "La raison du ban",
+      description: "La raison du déban",
       type: "STRING",
-      required: true,
     },
   ],
   async runInteraction(client, interaction, guildSettings) {
-    const member = interaction.options.getMember("member", true);
-    const reason = interaction.options.getString("reason") || "Aucune raison indiquée.";
+    const member = interaction.options.getString("memberid");
+    const reason =
+      interaction.options.getString("reason") || "Aucune raison indiquée.";
     const logChannel = client.channels.cache.get(guildSettings.modChannel);
 
     if (!member)
       return interaction.reply({
-        content: "Le membre n'a pas été trouvé!",
-        ephemeral: true,
-      });
-    if (!member.bannable)
-      return interaction.reply({
-        content: "Ce membre ne peut pas être ban par le bot!",
+        content: "L'id du membre n'a pas été trouvé!",
         ephemeral: true,
       });
 
@@ -43,19 +38,19 @@ module.exports = {
         name: `${interaction.member.displayName} (${interaction.member.id})`,
         iconURL: interaction.user.displayAvatarURL(),
       })
-      .setColor("#FF5C5C")
+      .setColor("#5CFF9D")
       .setDescription(
-        `**Membre**: \`${member.user.tag}\` (${member.id})
-      **Action**: Ban
+        `**Membre**: \`${member}\`
+      **Action**: Unban
       **Raison**: ${reason}`
       )
       .setTimestamp();
 
     await interaction.reply({
-      content: `Le membre ${member} a été ban!`,
+      content: `Le membre ${member} a été unban!`,
       ephemeral: true,
     });
     await logChannel.send({ embeds: [embed] });
-    await member.ban({ reason: reason, days: 7 });
+    await interaction.guild.members.unban(member);
   },
 };

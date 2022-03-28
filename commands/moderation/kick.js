@@ -24,7 +24,7 @@ module.exports = {
   ],
   async runInteraction(client, interaction, guildSettings) {
     const member = interaction.options.getMember("member", true);
-    const reason = interaction.options.getString("reason");
+    const reason = interaction.options.getString("reason") || "Aucune raison indiquée.";
     const logChannel = client.channels.cache.get(guildSettings.modChannel);
 
     if (!member)

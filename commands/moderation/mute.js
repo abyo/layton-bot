@@ -33,7 +33,7 @@ module.exports = {
     const member = interaction.options.getMember("member", true);
     const duration = interaction.options.getString("duration");
     const convertedTime = ms(duration);
-    const reason = interaction.options.getString("reason");
+    const reason = interaction.options.getString("reason") || "Aucune raison indiquée.";
     const logChannel = client.channels.cache.get(guildSettings.modChannel);
 
     if (!member)

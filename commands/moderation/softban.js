@@ -1,30 +1,31 @@
 const { MessageEmbed } = require("discord.js");
 
 module.exports = {
-  name: "ban",
+  name: "softban",
   category: "moderation",
   permissions: ["BAN_MEMBERS"],
   ownerOnly: false,
-  usage: "ban [@member] [reason]",
-  examples: ["ban @Abyo raison"],
-  description: "Bannir un utilisateur avec une raison",
+  usage: "softban [@member] [reason]",
+  examples: ["softban @Abyo raison"],
+  description: "Softban un utilisateur (ban puis unban) avec une raison",
   options: [
     {
       name: "member",
-      description: "L'utilisateur a ban",
+      description: "L'utilisateur à softban",
       type: "USER",
       required: true,
     },
     {
       name: "reason",
-      description: "La raison du ban",
+      description: "La raison du softban",
       type: "STRING",
       required: true,
     },
   ],
   async runInteraction(client, interaction, guildSettings) {
     const member = interaction.options.getMember("member", true);
-    const reason = interaction.options.getString("reason") || "Aucune raison indiquée.";
+    const reason =
+      interaction.options.getString("reason") || "Aucune raison indiquée.";
     const logChannel = client.channels.cache.get(guildSettings.modChannel);
 
     if (!member)
@@ -34,7 +35,7 @@ module.exports = {
       });
     if (!member.bannable)
       return interaction.reply({
-        content: "Ce membre ne peut pas être ban par le bot!",
+        content: "Ce membre ne peut pas être softban par le bot!",
         ephemeral: true,
       });
 
@@ -43,19 +44,20 @@ module.exports = {
         name: `${interaction.member.displayName} (${interaction.member.id})`,
         iconURL: interaction.user.displayAvatarURL(),
       })
-      .setColor("#FF5C5C")
+      .setColor("ffb969")
       .setDescription(
         `**Membre**: \`${member.user.tag}\` (${member.id})
-      **Action**: Ban
+      **Action**: Softban
       **Raison**: ${reason}`
       )
       .setTimestamp();
 
     await interaction.reply({
-      content: `Le membre ${member} a été ban!`,
+      content: `Le membre ${member} a été softban!`,
       ephemeral: true,
     });
     await logChannel.send({ embeds: [embed] });
     await member.ban({ reason: reason, days: 7 });
+    await interaction.guild.members.unban(member.id);
   },
 };
