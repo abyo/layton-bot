@@ -6,7 +6,12 @@ module.exports = {
   async execute(client) {
     Logger.client("- prêt à être utilisé");
 
-    const devGuild = await client.guilds.cache.get("951144271988293663");
+    client.user.setPresence({
+      activities: [{ name: "with /help", type: "PLAYING" }],
+      status: "dnd",
+    });
+
+    const devGuild = await client.guilds.cache.get("810091118401552395");
     devGuild.commands.set(client.commands.map((cmd) => cmd));
   },
 };

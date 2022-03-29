@@ -22,8 +22,8 @@ module.exports = {
       required: false,
     },
   ],
-  async runInteraction(client, interaction, guildSettings) {
-    const prefix = guildSettings.prefix;
+  async runInteraction(client, interaction) {
+    const prefix = "/";
     const cmdName = interaction.options.getString("command");
 
     if (!cmdName) {
