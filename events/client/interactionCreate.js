@@ -36,7 +36,12 @@ module.exports = {
         });
 
       cmd.runInteraction(client, interaction, guildSettings);
-    } else if (interaction.isButton()) {
+    } else if(interaction.isAutocomplete()){
+      const cmd = client.commands.get(interaction.commandName);
+      if (!cmd) return;
+      cmd.runAutocomplete(client, interaction, guildSettings);
+    }
+    else if (interaction.isButton()) {
       const btn = client.buttons.get(interaction.customId);
       if (!btn) return interaction.reply("Ce bouton n'existe pas!");
       btn.runInteraction(client, interaction, guildSettings);

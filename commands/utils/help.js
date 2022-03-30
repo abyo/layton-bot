@@ -61,8 +61,8 @@ module.exports = {
       content: `
 \`\`\`makefile
 [Help: Commande -> ${cmd.name}] ${
-        cmd.ownerOnly ? "/!\\ Pour les admins du bot uniquement /!\\" : ""
-      }
+  cmd.ownerOnly ? "/!\\ Pour les admins du bot uniquement /!\\" : ""
+}
 
 ${cmd.description ? cmd.description : contextDescription[`${cmd.name}`]}
 
