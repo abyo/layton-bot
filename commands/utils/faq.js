@@ -114,6 +114,8 @@ module.exports = {
       const content = interaction.options.getString("contenu")?.trim();
       if(!name || !description || !category || !content) return interaction.reply("Veuillez entrer tous les champs.");
       if(!guildSettings.faq) guildSettings.faq = [];
+      const checkDup = guildSettings.faq.find(faq => faq.name === name);
+      if (checkDup) return interaction.reply("Ce tag existe déjà.");
       guildSettings.faq.push({
         name,
         description,
