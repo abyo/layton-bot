@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node .",
-    "pm2": "./node_modules/.bin/pm2 start index.js"
+    "pm2": "./node_modules/.bin/pm2 start index.js",
+    "lint": "eslint *.js **/*.js"
   },
   "keywords": [],
   "author": "",

@@ -10,8 +10,7 @@ module.exports = {
       activities: [{ name: "with /help", type: "PLAYING" }],
       status: "dnd",
     });
-
-    const devGuild = await client.guilds.cache.get("810091118401552395");
+    const devGuild = await client.guilds.cache.get(process.env.GUILD_ID);
     devGuild.commands.set(client.commands.map((cmd) => cmd));
   },
 };

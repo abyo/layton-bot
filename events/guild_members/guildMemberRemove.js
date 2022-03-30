@@ -15,14 +15,14 @@ module.exports = {
       .setDescription(
         `± Nom d'utilisateur: ${member.displayName}
       ± Créé le: <t:${parseInt(
-        member.user.createdTimestamp / 1000
-      )}:f> (<t:${parseInt(member.user.createdTimestamp / 1000)}:R>)
+    member.user.createdTimestamp / 1000
+  )}:f> (<t:${parseInt(member.user.createdTimestamp / 1000)}:R>)
       ± Rejoint le: <t:${parseInt(
-        member.joinedTimestamp / 1000
-      )}:f> (<t:${parseInt(member.joinedTimestamp / 1000)}:R>)
+    member.joinedTimestamp / 1000
+  )}:f> (<t:${parseInt(member.joinedTimestamp / 1000)}:R>)
       ± Quitté le: <t:${parseInt(Date.now() / 1000)}:f> (<t:${parseInt(
-          Date.now() / 1000
-        )}:R>)
+  Date.now() / 1000
+)}:R>)
       `
       )
       .setTimestamp()
