@@ -1,4 +1,5 @@
 exports.hasHelperOrModoPerms = (member) => {
-  if(!member.roles.cache.has([process.env.MODO_ROLE, process.env.HELPER_ROLE])) return true;
+  const roles = [process.env.MODO_ROLE, process.env.HELPER_ROLE];
+  for (const role of roles) { if (member.roles.cache.has(role)) return true; }
   return false;
 };

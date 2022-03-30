@@ -9,6 +9,7 @@
  * - show
  */
 const {hasHelperOrModoPerms} = require("../../utils/index.js");
+
 module.exports = {
   name: "faq",
   category: "utils",
@@ -160,7 +161,7 @@ module.exports = {
     }
     case "list":{
       if(!guildSettings.faq) return interaction.reply("Il n'y a pas de tags.");
-      const faq = guildSettings.faq.map(faq => `**${faq.name}** : ${faq.description}`).join("\n\n");
+      const faq = guildSettings.faq.map(faq => `**${faq.name}** : ${faq.description}`).join("\n");
       interaction.reply(faq);
       break;
     }
