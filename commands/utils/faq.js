@@ -158,7 +158,7 @@ module.exports = {
       if(!guildSettings.faq) return interaction.reply("Il n'y a pas de tags.");
       const faq = guildSettings.faq.find(faq => faq.name === name);
       if(!faq) return interaction.reply("Ce tag n'existe pas.");
-      interaction.reply(`**${faq.name}**\n${faq.content}`);
+      interaction.reply(faq.content);
       break;
     }
     case "list":{
