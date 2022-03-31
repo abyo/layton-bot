@@ -27,7 +27,7 @@ module.exports = {
     const messageId = interaction.options.getChannel("messageId", true);
     const channel = interaction.options.getChannel("channel", true);
 
-    const message = await channel.messages.fetch(messageId);
+    const message = await interaction.channel.messages.fetch(messageId);
     if (!message)
     return interaction.reply({
         content: "Le message n'existe pas!",
