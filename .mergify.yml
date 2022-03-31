@@ -1,3 +1,7 @@
+queue_rules:
+  - name: default
+    conditions: []
+
 pull_request_rules:
 - actions:
     queue:
@@ -6,11 +10,11 @@ pull_request_rules:
       commit_message_template: |
         {{ title }} (#{{ number }})
         {{ body }}
-  name: Automatically merge pull requests on approval
+  name: Automatically merge pull requests
   conditions:
   - label=merge me
-  - ! '#approved-reviews-by>=1'
-  - ! '#changes-requested-reviews-by=0'
+  - '#approved-reviews-by>=1'
+  - '#changes-requested-reviews-by=0'
 - actions:
     delete_head_branch: {}
   name: Delete head branch after merge
