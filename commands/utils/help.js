@@ -20,6 +20,7 @@ module.exports = {
       description: "Taper le nom de votre commande",
       type: "STRING",
       required: false,
+      autocomplete:true
     },
   ],
   async runInteraction(client, interaction) {
@@ -79,4 +80,12 @@ Ne pas inclure ces caractères -> {}, [] et <> dans vos commandes.
       ephemeral: true,
     });
   },
+  async runAutocomplete(client, interaction) {
+    const focusedOption = interaction.options.getFocused(true);
+    const choices = client.commands?.map(cmd => cmd.name);
+    if(!choices) return;
+    const filtered = choices.filter(choice => choice.includes(focusedOption.value.toLowerCase()));
+    const filteredLimit = filtered.slice(0, 15);
+    await interaction.respond(filteredLimit.map(choice => ({ name: choice, value: choice })));
+  }
 };
