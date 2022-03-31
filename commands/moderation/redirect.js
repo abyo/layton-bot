@@ -13,39 +13,41 @@ module.exports = {
       name: "messageId",
       description: "L'ID du message à rediriger",
       type: "STRING",
+      required: true,
     },
     {
-        name: "channel",
-        description: "Le salon où envoyer le message",
-        type: "CHANNEL",
+      name: "channel",
+      description: "Le salon où envoyer le message",
+      type: "CHANNEL",
+      channelType: "text",
+      required: true,
     },  
   ],
   async runInteraction(client, interaction) {
     const messageId = interaction.options.getChannel("messageId", true);
     const channel = interaction.options.getChannel("channel", true);
 
-    if (!messageId)
-      return interaction.reply({
-        content: "Aucun message n'a été spécifié!",
-        ephemeral: true,
-      });
-    if (!channel)
-      return interaction.reply({
-        content: "Aucun salon n'a été spécifié!",
-        ephemeral: true,
-      });
-
     const message = await channel.messages.fetch(messageId);
     if (!message)
-      return interaction.reply({
+    return interaction.reply({
         content: "Le message n'existe pas!",
         ephemeral: true,
-      });
+    });
+    
+    const files = [];
+    if (message.attachments.size > 0) {
+        const attachments = message.attachments.array();
+        if (attachments.length > 0) {
+            for (const attachment of attachments) {
+                files.push(attachment.url);
+            }
+        }
+    };
       
     message.channel.send(`${message.author} votre message à été redirigé vers le salon ${channel}. Si vous ne voyez pas le salon, direction <#811949160538177556>`);
     message.delete()
         .then(() => {
-            channel.send(message.content)
+            channel.send({ content: message.content, files: files.length > 0 ? files : undefined });
         })
 
     const embed = new MessageEmbed()
