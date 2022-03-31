@@ -19,7 +19,7 @@ module.exports = {
       name: "channel",
       description: "Le salon où envoyer le message",
       type: "CHANNEL",
-      channelType: "text",
+      channelTypes: ["GUILD_TEXT"],
       required: true,
     },  
   ],
