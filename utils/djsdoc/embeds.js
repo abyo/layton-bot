@@ -39,7 +39,7 @@ function buildGeneralEmbed(parent, meta) {
       description += `\`${p.name}\`,`;
     });
   }
-  if(parent.meta) description += `\n\n[Code source](${meta.github + parent.meta.path + "/" + parent.meta.file + "#L" + parent.meta.line})`;
+  if(parent.meta) description += `\n\n[Source code](${meta.github + parent.meta.path + "/" + parent.meta.file + "#L" + parent.meta.line})`;
   description = normalizeStr(description);
   const embed = new MessageEmbed()
     .setTitle(parent.name)
