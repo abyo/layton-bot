@@ -44,36 +44,34 @@ function buildGeneralEmbed(parent, meta) {
   const embed = new MessageEmbed()
     .setTitle(parent.name)
     .setDescription(description)
-    .setColor(0x00AE86)
-    .setThumbnail(parent.icon);
+    .setColor(0x00AE86);
   return embed;
 }
 
-function buildSpecificEmbed(methodOrProp, meta) {
+function buildSpecificEmbed(data, meta) {
   let description = "";
-  if(methodOrProp.description) description += `**Description:** ${methodOrProp.description}`;
-  if(methodOrProp.params?.length) {
+  if(data.description) description += `**Description:** ${data.description}`;
+  if(data.params?.length) {
     description += "\n\n**Parameters:**\n";
-    methodOrProp.params.forEach(p => {
+    data.params.forEach(p => {
       description += `- \`${p.name}\`(${removeLastChar(arraysToStr(p.type, "|"))})${p.description ? "\n" + p.description : ""}`;
     });
   }
-  if(methodOrProp.returns?.length) {
+  if(data.returns?.length) {
     description += "\n**Returns:**\n";
-    description += arraysToStr(methodOrProp.returns, "", "");
+    description += arraysToStr(data.returns, "", "");
   }
-  if(methodOrProp.examples?.length) {
+  if(data.examples?.length) {
     description += "\n**Examples:**\n";
-    methodOrProp.examples.forEach(e => {
+    data.examples.forEach(e => {
       description += `\`\`\`js\n${e}\n\`\`\``;
     });
   }
-  if(methodOrProp.meta) description += `\n\n[Code source](${meta.github + methodOrProp.meta.path + "/" + methodOrProp.meta.file + "#L" + methodOrProp.meta.line})`;
+  if(data.meta) description += `\n\n[Code source](${meta.github + data.meta.path + "/" + data.meta.file + "#L" + data.meta.line})`;
   description = normalizeStr(description);
   const embed = new MessageEmbed()
-    .setTitle(methodOrProp.async ? `[async] ${methodOrProp.name}` : methodOrProp.name)
+    .setTitle(data.async ? `[async] ${data.name}` : data.name)
     .setColor(0x00AE86)
-    .setThumbnail(methodOrProp.icon)
     .setDescription(description);
   return embed;
 }
