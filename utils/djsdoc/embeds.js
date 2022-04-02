@@ -41,7 +41,7 @@ function buildClassOrTypedefEmbed(parent) {
   return embed;
 }
 
-function buildMethodOrPropEmbed(methodOrProp) {
+function buildMethodOrPropEmbed(methodOrProp, meta) {
   let description = methodOrProp.description + "\n";
   if(methodOrProp.params) {
     description += "\n**Parameters:**\n";
@@ -59,6 +59,7 @@ function buildMethodOrPropEmbed(methodOrProp) {
       description += `\`\`\`js\n${e}\n\`\`\``;
     });
   }
+  description += `\n\n[Code source](${meta.github + methodOrProp.meta.path + "/" + methodOrProp.meta.file + "#L" + methodOrProp.meta.line})`;
   description = normalizeStr(description);
   const embed = new MessageEmbed()
     .setTitle(methodOrProp.async ? `[async] ${methodOrProp.name}` : methodOrProp.name)

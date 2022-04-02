@@ -24,7 +24,7 @@ module.exports = {
     case "method/prop": {
       const methorOrProp = djsutils.resolveMethodOrProp(parent, query);
       if(!methorOrProp) return interaction.reply("Aucun résultat pour votre recherche");
-      const embed = djsutils.buildMethodOrPropEmbed(methorOrProp);
+      const embed = djsutils.buildMethodOrPropEmbed(methorOrProp, {github: "https://github.com/discordjs/discord.js/tree/main/packages/discord.js/"});
       interaction.reply({embeds:[embed]});
     }
       break;
