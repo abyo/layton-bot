@@ -53,11 +53,46 @@ function fetchGithub(toFetch){
   toFetch.forEach(async (f) => {
     const res = await axios.get(f.url);
     f.data = res.data;
+    f.search = getSearch(res.data);
   });
   Logger.info("Github fetched");
   return toFetch;
 }
 
+function getSearch(json){
+  const results = [];
+  if(json.classes){
+    json.classes.forEach(c => {
+      results.push(c.name);
+      if(c.props){
+        c.props.forEach(p => {
+          results.push(`${c.name}.${p.name}`);
+        });
+      }
+      if(c.methods){
+        c.methods.forEach(m => {
+          results.push(`${c.name}#${m.name}`);
+        });
+      }
+      if(c.events){
+        c.events.forEach(m => {
+          results.push(`${c.name}#${m.name}`);
+        });
+      }
+    });
+    if(json.typedefs){
+      json.typedefs.forEach(c => {
+        results.push(c.name);
+        if(c.props){
+          c.props.forEach(p => {
+            results.push(`${c.name}.${p.name}`);
+          });
+        }
+      });
+    }
+  }
+  return results;
+}
 
 const {buildClassOrTypedefEmbed, buildMethodOrPropEmbed} = require("./embeds");
 

@@ -5,6 +5,7 @@ const djsdocs = [
     github: "https://github.com/discordjs/discord.js/tree/stable/discord.js",
     branch : "stable",
     data: "",
+    search: []
   },
   {
     name: "Discord.js/main",
@@ -12,6 +13,7 @@ const djsdocs = [
     github: "https://github.com/discordjs/discord.js/tree/main/packages/discord.js",
     branch : "main",
     data: "",
+    search: []
   },
   {
     name: "Collection/stable",
@@ -19,6 +21,7 @@ const djsdocs = [
     github: "https://github.com/discordjs/discord.js/tree/stable/packages/collection",
     branch : "stable",
     data: "",
+    search: []
   },
   {
     name: "Collection/main",
@@ -26,6 +29,7 @@ const djsdocs = [
     github: "https://github.com/discordjs/discord.js/tree/main/packages/collection",
     branch : "main",
     data: "",
+    search: []
   },
  
   {
@@ -34,6 +38,7 @@ const djsdocs = [
     github: "https://github.com/discordjs/discord.js/tree/stable/packages/builders",
     branch : "stable",
     data: "",
+    search: []
   },
   {
     name: "Builders/main",
@@ -41,6 +46,7 @@ const djsdocs = [
     github: "https://github.com/discordjs/discord.js/tree/main/packages/builders",
     branch : "main",
     data: "",
+    search: []
   },
   
 ];

@@ -20,7 +20,8 @@ module.exports = {
       name: "query",
       type: "STRING",
       description: "Votre recherche",
-      required: true
+      required: true,
+      autocomplete: true
     },
 
   ],
@@ -57,4 +58,18 @@ module.exports = {
       break;
     }
   },
+  async runAutocomplete(client, interaction,) {
+    const focusedOption = interaction.options.getFocused(true);
+    const docName = interaction.options.getString("doc");
+    const doc = client.constants.djsdocs.find((x) => x.name === docName);
+    if(!doc) return;
+    const filtered = doc.search.filter(choice => choice.includes(focusedOption.value));
+    const filteredLimit = filtered.slice(0, 25);
+    await interaction.respond(filteredLimit.map(choice => ({ name: choice, value: choice })));
+    // const choices = guildSettings.faq?.map(tag => tag.name);
+    // if(!choices) return;
+    // const filtered = choices.filter(choice => choice.includes(focusedOption.value.toLowerCase()));
+    // const filteredLimit = filtered.slice(0, 15);
+    // await interaction.respond(filteredLimit.map(choice => ({ name: choice, value: choice })));
+  }
 };
