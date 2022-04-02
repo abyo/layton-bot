@@ -20,9 +20,9 @@ function normalizeStr(str) {
 }
 function buildClassOrTypedefEmbed(parent, meta) {
   let description = "";
-  if(parent.description) description += `**Description:** ${parent.description}\n`;
+  if(parent.description) description += `**Description:** ${parent.description}`;
   if(parent.props.length) {
-    description += "\n**Properties:**\n";
+    description += "\n\n**Properties:**\n";
     parent.props.forEach(p => {
       description += `\`${p.name}\`,`;
     });
@@ -51,11 +51,11 @@ function buildClassOrTypedefEmbed(parent, meta) {
 
 function buildMethodOrPropEmbed(methodOrProp, meta) {
   let description = "";
-  if(methodOrProp.description) description += `**Description:** ${methodOrProp.description}\n`;
+  if(methodOrProp.description) description += `**Description:** ${methodOrProp.description}`;
   if(methodOrProp.params?.length) {
-    description += "\n**Parameters:**\n";
+    description += "\n\n**Parameters:**\n";
     methodOrProp.params.forEach(p => {
-      description += `- \`${p.name}\`(${removeLastChar(arraysToStr(p.type, "|"))})${p.description ? "\n" + p.description : ""}\n\n`;
+      description += `- \`${p.name}\`(${removeLastChar(arraysToStr(p.type, "|"))})${p.description ? "\n" + p.description : ""}`;
     });
   }
   if(methodOrProp.returns?.length) {
@@ -75,7 +75,6 @@ function buildMethodOrPropEmbed(methodOrProp, meta) {
     .setColor(0x00AE86)
     .setThumbnail(methodOrProp.icon)
     .setDescription(description);
-  
   return embed;
 }
 
