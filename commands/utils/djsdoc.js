@@ -15,7 +15,7 @@ module.exports = {
       required: true
     }
   ],
-  async runInteraction(client, interaction) {
+  async runInteraction(_, interaction) {
     const query = interaction.options.getString("query");
     const type = djsutils.getQueryType(query);
     const parent = djsutils.getParent(query);
@@ -23,6 +23,7 @@ module.exports = {
     switch (type) {
     case "method/prop": {
       const methorOrProp = djsutils.resolveMethodOrProp(parent, query);
+      if(!methorOrProp) return interaction.reply("Aucun résultat pour votre recherche");
       const embed = djsutils.buildMethodOrPropEmbed(methorOrProp);
       interaction.reply({embeds:[embed]});
     }
