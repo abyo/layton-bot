@@ -19,15 +19,15 @@ function normalizeStr(str) {
   return str.replace(/<info>|<\/info>/g, "");
 }
 function buildClassOrTypedefEmbed(parent) {
-  let description = parent.description;
+  let description = parent.description ;
   if(parent.props.length) {
-    description += "**Properties:**\n";
+    description += "\n**Properties:**\n";
     parent.props.forEach(p => {
       description += `\`${p.name}\`,`;
     });
   }
   if(parent.methods?.length) {
-    description += "\n**Methods:**\n";
+    description += "\n\n**Methods:**\n";
     parent.methods.forEach(p => {
       description += `\`${p.name}\`,`;
     });
@@ -46,7 +46,7 @@ function buildMethodOrPropEmbed(methodOrProp) {
   if(methodOrProp.params) {
     description += "\n**Parameters:**\n";
     methodOrProp.params.forEach(p => {
-      description += `- \`${p.name}\`(${removeLastChar(arraysToStr(p.type, "|"))})\n`;
+      description += `- \`${p.name}\`(${removeLastChar(arraysToStr(p.type, "|"))})\n${p.description}\n\n`;
     });
   }
   if(methodOrProp.returns?.length) {
