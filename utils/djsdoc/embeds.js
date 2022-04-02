@@ -18,7 +18,7 @@ function removeLastChar(str) {
 function normalizeStr(str) {
   return str.replace(/<info>|<\/info>/g, "");
 }
-function buildClassOrTypedefEmbed(parent) {
+function buildClassOrTypedefEmbed(parent, meta) {
   let description = parent.description ;
   if(parent.props.length) {
     description += "\n**Properties:**\n";
@@ -32,6 +32,7 @@ function buildClassOrTypedefEmbed(parent) {
       description += `\`${p.name}\`,`;
     });
   }
+  if(parent.meta) description += `\n\n[Code source](${meta.github + parent.meta.path + "/" + parent.meta.file + "#L" + parent.meta.line})`;
   description = normalizeStr(description);
   const embed = new MessageEmbed()
     .setTitle(parent.name)
@@ -59,7 +60,7 @@ function buildMethodOrPropEmbed(methodOrProp, meta) {
       description += `\`\`\`js\n${e}\n\`\`\``;
     });
   }
-  description += `\n\n[Code source](${meta.github + methodOrProp.meta.path + "/" + methodOrProp.meta.file + "#L" + methodOrProp.meta.line})`;
+  if(methodOrProp.meta) description += `\n\n[Code source](${meta.github + methodOrProp.meta.path + "/" + methodOrProp.meta.file + "#L" + methodOrProp.meta.line})`;
   description = normalizeStr(description);
   const embed = new MessageEmbed()
     .setTitle(methodOrProp.async ? `[async] ${methodOrProp.name}` : methodOrProp.name)

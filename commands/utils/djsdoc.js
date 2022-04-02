@@ -29,7 +29,7 @@ module.exports = {
     }
       break;
     case "parent":{
-      const embed = djsutils.buildClassOrTypedefEmbed(parent);
+      const embed = djsutils.buildClassOrTypedefEmbed(parent, {github: "https://github.com/discordjs/discord.js/tree/main/packages/discord.js/"});
       interaction.reply({embeds:[embed]});
       break;
     }
