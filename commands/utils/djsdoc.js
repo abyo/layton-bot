@@ -1,5 +1,6 @@
 const djsutils = require("../../utils/djsdoc");
 const constants = require("../../constants");
+
 module.exports = {
   name: "djsdoc",
   category: "utils",
@@ -66,10 +67,5 @@ module.exports = {
     const filtered = doc.search.filter(choice => choice.includes(focusedOption.value));
     const filteredLimit = filtered.slice(0, 25);
     await interaction.respond(filteredLimit.map(choice => ({ name: choice, value: choice })));
-    // const choices = guildSettings.faq?.map(tag => tag.name);
-    // if(!choices) return;
-    // const filtered = choices.filter(choice => choice.includes(focusedOption.value.toLowerCase()));
-    // const filteredLimit = filtered.slice(0, 15);
-    // await interaction.respond(filteredLimit.map(choice => ({ name: choice, value: choice })));
   }
 };
