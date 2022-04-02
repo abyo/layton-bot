@@ -23,20 +23,20 @@ function buildGeneralEmbed(parent, meta) {
   if(parent.description) description += `**Description:** ${parent.description}`;
   if(parent.props.length) {
     description += "\n\n**Properties:**\n";
-    parent.props.forEach(p => {
-      description += `\`${p.name}\`,`;
+    parent.props.forEach((p, index)=> {
+      description += `\`${p.name}\`${index+1 < parent.props.length ? "," : ""}`;
     });
   }
   if(parent.methods?.length) {
     description += "\n\n**Methods:**\n";
-    parent.methods.forEach(p => {
-      description += `\`${p.name}\`,`;
+    parent.methods.forEach((m, index) => {
+      description += `\`${m.name}\`${index+1 < parent.methods.length ? "," : ""}`;
     });
   }
   if(parent.events?.length) {
     description += "\n\n**Events:**\n";
-    parent.events.forEach(p => {
-      description += `\`${p.name}\`,`;
+    parent.events.forEach((e, index) => {
+      description += `\`${e.name}\`${index+1 < parent.events.length ? "," : ""}`;
     });
   }
   if(parent.meta) description += `\n\n[Source code](${meta.github + parent.meta.path + "/" + parent.meta.file + "#L" + parent.meta.line})`;
