@@ -2,7 +2,7 @@ const { Client, Collection } = require("discord.js");
 const mongoose = require("mongoose");
 require("dotenv").config();
 const Logger = require("./utils/Logger");
-const {fetchGithub} = require("./utils/djsdoc/index");
+const { fetchGithub } = require("./utils/djsdoc/index");
 
 const client = new Client({
   intents: 98303,

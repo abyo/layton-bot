@@ -3,14 +3,14 @@ function getQueryType(query) {
   else return "parent";
 }
 
-function getQueryParentName(query){
-  if(query.includes("#")) return query.split("#")[0];
-  if(query.includes(".")) return query.split(".")[0];
+function getQueryParentName(query) {
+  if (query.includes("#")) return query.split("#")[0];
+  if (query.includes(".")) return query.split(".")[0];
   return query;
 }
-function getQueryParamName(query){
-  if(query.includes("#")) return query.split("#")[1];
-  if(query.includes(".")) return query.split(".")[1];
+function getQueryParamName(query) {
+  if (query.includes("#")) return query.split("#")[1];
+  if (query.includes(".")) return query.split(".")[1];
   return query;
 }
 
