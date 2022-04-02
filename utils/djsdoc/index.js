@@ -2,26 +2,8 @@ const axios = require("axios");
 const Logger = require("../Logger");
 
 // Return type of the query (parent, method/prop)
-function getQueryType(query) {
-  if (query.includes("#") || query.includes(".")) return "method/prop";
-  else return "parent";
-}
 
-function getQueryParentName(query){
-  if(query.includes("#")) return query.split("#")[0];
-  if(query.includes(".")) return query.split(".")[0];
-  return query;
-}
-function getQueryParamName(query){
-  if(query.includes("#")) return query.split("#")[1];
-  if(query.includes(".")) return query.split(".")[1];
-  return query;
-}
-function getParent(json, query) {
-  const parentName = getQueryParentName(query);
-  const parent = json.classes.find(clase => clase.name === parentName) || json.typedefs.find(typedef => typedef.name === parentName);
-  return parent;
-}
+
 
 
 // function buildClassEmbed(classInfos) {
@@ -42,6 +24,12 @@ function getParent(json, query) {
   
 //   return embed;
 // }
+const { getQueryType, getQueryParentName, getQueryParamName } = require("./query");
+const { getParent } = require("./parent");
+const {buildGeneralEmbed, buildSpecificEmbed} = require("./embeds");
+
+
+
 
 function resolveMethodOrPropOrEvent(parent, query) {
   const name = getQueryParamName(query);
@@ -94,7 +82,6 @@ function getSearch(json){
   return results;
 }
 
-const {buildGeneralEmbed, buildSpecificEmbed} = require("./embeds");
 
 module.exports = {
   getQueryType, 

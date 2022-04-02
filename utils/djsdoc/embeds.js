@@ -1,14 +1,10 @@
 const {MessageEmbed} = require("discord.js");
-
-
 function arraysToStr(arr, join=""){
   let str = "";
   arr.forEach(a => {
     if(Array.isArray(a)) {
       str += arraysToStr(a, join);
-    } else {
-      str += a + join;
-    }
+    } else str += a + join;
   });
   return str;
 }
@@ -59,7 +55,7 @@ function buildSpecificEmbed(parent, child, meta) {
   }
   if(child.returns?.length) {
     description += "\n**Returns:**\n";
-    description += arraysToStr(child.returns, "", "");
+    description += arraysToStr(child.returns, "");
   }
   if(child.examples?.length) {
     description += "\n**Examples:**\n";
