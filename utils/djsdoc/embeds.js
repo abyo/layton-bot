@@ -19,7 +19,8 @@ function normalizeStr(str) {
   return str.replace(/<info>|<\/info>/g, "");
 }
 function buildClassOrTypedefEmbed(parent, meta) {
-  let description = parent.description ;
+  let description = "";
+  if(parent.description) description += `**Description:** ${parent.description}\n`;
   if(parent.props.length) {
     description += "\n**Properties:**\n";
     parent.props.forEach(p => {
@@ -43,8 +44,9 @@ function buildClassOrTypedefEmbed(parent, meta) {
 }
 
 function buildMethodOrPropEmbed(methodOrProp, meta) {
-  let description = methodOrProp.description + "\n";
-  if(methodOrProp.params) {
+  let description = "";
+  if(methodOrProp.description) description += `**Description:** ${methodOrProp.description}\n`;
+  if(methodOrProp.params?.length) {
     description += "\n**Parameters:**\n";
     methodOrProp.params.forEach(p => {
       description += `- \`${p.name}\`(${removeLastChar(arraysToStr(p.type, "|"))})\n${p.description}\n\n`;
@@ -64,7 +66,6 @@ function buildMethodOrPropEmbed(methodOrProp, meta) {
   description = normalizeStr(description);
   const embed = new MessageEmbed()
     .setTitle(methodOrProp.async ? `[async] ${methodOrProp.name}` : methodOrProp.name)
-    .setDescription(methodOrProp.description)
     .setColor(0x00AE86)
     .setThumbnail(methodOrProp.icon)
     .setDescription(description);

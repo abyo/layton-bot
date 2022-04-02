@@ -1,5 +1,5 @@
-const json = require("../../doc.json");
-
+const axios = require("axios");
+const Logger = require("../Logger");
 
 // Return type of the query (parent, method/prop)
 function getQueryType(query) {
@@ -17,7 +17,7 @@ function getQueryParamName(query){
   if(query.includes(".")) return query.split(".")[1];
   return query;
 }
-function getParent(query) {
+function getParent(json, query) {
   const parentName = getQueryParentName(query);
   const parent = json.classes.find(clase => clase.name === parentName) || json.typedefs.find(typedef => typedef.name === parentName);
   return parent;
@@ -49,9 +49,25 @@ function resolveMethodOrProp(parent, query) {
   return methodOrProp;
 }
 
-
+function fetchGithub(toFetch){
+  toFetch.forEach(async (f) => {
+    const res = await axios.get(f.url);
+    f.data = res.data;
+  });
+  Logger.info("Github fetched");
+  return toFetch;
+}
 
 
 const {buildClassOrTypedefEmbed, buildMethodOrPropEmbed} = require("./embeds");
 
-module.exports = {getQueryType, buildClassOrTypedefEmbed, buildMethodOrPropEmbed, getParent, resolveMethodOrProp, getQueryParentName, getQueryParamName};
+module.exports = {
+  getQueryType, 
+  buildClassOrTypedefEmbed, 
+  buildMethodOrPropEmbed, 
+  getParent,
+  resolveMethodOrProp, 
+  getQueryParentName,
+  getQueryParamName,
+  fetchGithub
+};

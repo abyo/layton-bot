@@ -1,4 +1,5 @@
 const djsutils = require("../../utils/djsdoc");
+const constants = require("../../constants");
 module.exports = {
   name: "djsdoc",
   category: "utils",
@@ -9,18 +10,31 @@ module.exports = {
   description: "Renvoi la doc de Discord.js",
   options: [
     {
+      name: "doc",
+      description: "La doc à afficher",
+      required: true,
+      type: "STRING",
+      choices: constants.djsdocs.map((x) => { return {name: x.name, value: x.name};})
+    },
+    {
       name: "query",
       type: "STRING",
       description: "Votre recherche",
       required: true
-    }
+    },
+
   ],
-  async runInteraction(_, interaction) {
+  async runInteraction(client, interaction) {
+    const docName = interaction.options.getString("doc");
+    const doc = client.constants.djsdocs.find((x) => x.name === docName);
+    if(!doc) return interaction.channel.send("La doc n'existe pas");
+    const data = doc.data;
+
     const query = interaction.options.getString("query");
     const type = djsutils.getQueryType(query);
 
     // Un parent est une classe ou un typedef
-    const parent = djsutils.getParent(query);
+    const parent = djsutils.getParent(data, query);
     if(!parent) return interaction.reply("Aucun résultat pour votre recherche");
 
 

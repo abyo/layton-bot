@@ -1,7 +1,8 @@
 const { Client, Collection } = require("discord.js");
-const dotenv = require("dotenv"); dotenv.config();
 const mongoose = require("mongoose");
+require("dotenv").config();
 const Logger = require("./utils/Logger");
+const {fetchGithub} = require("./utils/djsdoc/index");
 
 const client = new Client({
   intents: 98303,
@@ -17,6 +18,8 @@ const client = new Client({
 });
 
 require("./utils/Functions")(client);
+
+client.constants = require("./constants");
 
 process.on("exit", (code) => {
   Logger.client(`Le processus s'est arrêté avec le code: ${code}!`);
@@ -49,4 +52,6 @@ mongoose
     Logger.error(err);
   });
 
+client.constants.djsdocs = fetchGithub(client.constants.djsdocs);
+setInterval(() => client.constants.djsdocs = fetchGithub(client.constants.djsdocs), 1000 * 60 * 60 * 24);
 client.login(process.env.DISCORD_TOKEN);
