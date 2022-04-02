@@ -1,6 +1,5 @@
 # Logs
 *.log
-
 # Dependency directories
 node_modules/
 dist
@@ -42,3 +41,6 @@ yarn.lock
 TODO.md
 /commands/admin
 .env
+
+# Other
+doc.json
