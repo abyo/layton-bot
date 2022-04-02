@@ -18,7 +18,7 @@ function removeLastChar(str) {
 function normalizeStr(str) {
   return str.replace(/<info>|<\/info>/g, "");
 }
-function buildClassOrTypedefEmbed(parent, meta) {
+function buildGeneralEmbed(parent, meta) {
   let description = "";
   if(parent.description) description += `**Description:** ${parent.description}`;
   if(parent.props.length) {
@@ -49,7 +49,7 @@ function buildClassOrTypedefEmbed(parent, meta) {
   return embed;
 }
 
-function buildMethodOrPropEmbed(methodOrProp, meta) {
+function buildSpecificEmbed(methodOrProp, meta) {
   let description = "";
   if(methodOrProp.description) description += `**Description:** ${methodOrProp.description}`;
   if(methodOrProp.params?.length) {
@@ -78,4 +78,4 @@ function buildMethodOrPropEmbed(methodOrProp, meta) {
   return embed;
 }
 
-module.exports = { buildClassOrTypedefEmbed, buildMethodOrPropEmbed };
+module.exports = { buildGeneralEmbed, buildSpecificEmbed };

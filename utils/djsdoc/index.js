@@ -94,12 +94,12 @@ function getSearch(json){
   return results;
 }
 
-const {buildClassOrTypedefEmbed, buildMethodOrPropEmbed} = require("./embeds");
+const {buildGeneralEmbed, buildSpecificEmbed} = require("./embeds");
 
 module.exports = {
   getQueryType, 
-  buildClassOrTypedefEmbed, 
-  buildMethodOrPropEmbed, 
+  buildGeneralEmbed, 
+  buildSpecificEmbed, 
   getParent,
   resolveMethodOrPropOrEvent, 
   getQueryParentName,

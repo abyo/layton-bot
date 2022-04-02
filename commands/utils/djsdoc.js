@@ -44,12 +44,12 @@ module.exports = {
     case "method/prop": {
       const methorOrProp = djsutils.resolveMethodOrPropOrEvent(parent, query);
       if(!methorOrProp) return interaction.reply("Aucun résultat pour votre recherche");
-      const embed = djsutils.buildMethodOrPropEmbed(methorOrProp, doc);
+      const embed = djsutils.buildSpecificEmbed(methorOrProp, doc);
       interaction.reply({embeds:[embed]});
     }
       break;
     case "parent":{
-      const embed = djsutils.buildClassOrTypedefEmbed(parent, doc);
+      const embed = djsutils.buildGeneralEmbed(parent, doc);
       interaction.reply({embeds:[embed]});
       break;
     }
