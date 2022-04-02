@@ -173,7 +173,7 @@ module.exports = {
     const focusedOption = interaction.options.getFocused(true);
     const choices = guildSettings.faq?.map(tag => tag.name);
     if(!choices) return;
-    const filtered = choices.filter(choice => choice.startsWith(focusedOption.value.toLowerCase()));
+    const filtered = choices.filter(choice => choice.includes(focusedOption.value.toLowerCase()));
     const filteredLimit = filtered.slice(0, 15);
     await interaction.respond(filteredLimit.map(choice => ({ name: choice, value: choice })));
   }
