@@ -18,8 +18,13 @@ module.exports = {
   async runInteraction(_, interaction) {
     const query = interaction.options.getString("query");
     const type = djsutils.getQueryType(query);
+
+    // Un parent est une classe ou un typedef
     const parent = djsutils.getParent(query);
     if(!parent) return interaction.reply("Aucun résultat pour votre recherche");
+
+
+    // Séléction des différents types d'embeds
     switch (type) {
     case "method/prop": {
       const methorOrProp = djsutils.resolveMethodOrProp(parent, query);
