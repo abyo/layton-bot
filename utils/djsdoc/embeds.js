@@ -33,6 +33,12 @@ function buildClassOrTypedefEmbed(parent, meta) {
       description += `\`${p.name}\`,`;
     });
   }
+  if(parent.events?.length) {
+    description += "\n\n**Events:**\n";
+    parent.events.forEach(p => {
+      description += `\`${p.name}\`,`;
+    });
+  }
   if(parent.meta) description += `\n\n[Code source](${meta.github + parent.meta.path + "/" + parent.meta.file + "#L" + parent.meta.line})`;
   description = normalizeStr(description);
   const embed = new MessageEmbed()
@@ -49,7 +55,7 @@ function buildMethodOrPropEmbed(methodOrProp, meta) {
   if(methodOrProp.params?.length) {
     description += "\n**Parameters:**\n";
     methodOrProp.params.forEach(p => {
-      description += `- \`${p.name}\`(${removeLastChar(arraysToStr(p.type, "|"))})\n${p.description}\n\n`;
+      description += `- \`${p.name}\`(${removeLastChar(arraysToStr(p.type, "|"))})${p.description ? "\n" + p.description : ""}\n\n`;
     });
   }
   if(methodOrProp.returns?.length) {

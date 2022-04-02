@@ -43,9 +43,9 @@ function getParent(json, query) {
 //   return embed;
 // }
 
-function resolveMethodOrProp(parent, query) {
+function resolveMethodOrPropOrEvent(parent, query) {
   const name = getQueryParamName(query);
-  const methodOrProp = parent.methods.find(m => m.name === name) || parent.props.find(p => p.name === name);
+  const methodOrProp = parent.methods?.find(m => m.name === name) || parent.props?.find(p => p.name === name) || parent.events?.find(p => p.name === name);
   return methodOrProp;
 }
 
@@ -66,7 +66,7 @@ module.exports = {
   buildClassOrTypedefEmbed, 
   buildMethodOrPropEmbed, 
   getParent,
-  resolveMethodOrProp, 
+  resolveMethodOrPropOrEvent, 
   getQueryParentName,
   getQueryParamName,
   fetchGithub

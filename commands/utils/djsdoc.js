@@ -41,14 +41,14 @@ module.exports = {
     // Séléction des différents types d'embeds
     switch (type) {
     case "method/prop": {
-      const methorOrProp = djsutils.resolveMethodOrProp(parent, query);
+      const methorOrProp = djsutils.resolveMethodOrPropOrEvent(parent, query);
       if(!methorOrProp) return interaction.reply("Aucun résultat pour votre recherche");
-      const embed = djsutils.buildMethodOrPropEmbed(methorOrProp, {github: "https://github.com/discordjs/discord.js/tree/main/packages/discord.js/"});
+      const embed = djsutils.buildMethodOrPropEmbed(methorOrProp, doc);
       interaction.reply({embeds:[embed]});
     }
       break;
     case "parent":{
-      const embed = djsutils.buildClassOrTypedefEmbed(parent, {github: "https://github.com/discordjs/discord.js/tree/main/packages/discord.js/"});
+      const embed = djsutils.buildClassOrTypedefEmbed(parent, doc);
       interaction.reply({embeds:[embed]});
       break;
     }
