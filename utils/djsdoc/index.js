@@ -1,13 +1,7 @@
 const json = require("../../doc.json");
 
-/**
- * Query example:
- * Message -> parent
- * Message#send -> method/prop
- * Message.content -> method/prop
- * ChannelData -> parent
- */
-// Return type of the query (classe, method/prop)
+
+// Return type of the query (parent, method/prop)
 function getQueryType(query) {
   if (query.includes("#") || query.includes(".")) return "method/prop";
   else return "parent";
