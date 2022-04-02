@@ -6,7 +6,7 @@ module.exports = {
   category: "utils",
   permissions: ["SEND_MESSAGES"],
   ownerOnly: false,
-  usage: "djsdoc",
+  usage: "djsdoc [doc] [query]",
   examples: ["djsdoc"],
   description: "Renvoi la doc de Discord.js",
   options: [
@@ -69,7 +69,9 @@ module.exports = {
     filtered.push(...doc.search.filter(choice => choice.startsWith(focusedOption.value)));
 
     filtered.push(...doc.search.filter(choice => choice.includes(focusedOption.value)));
-    const filteredLimit = filtered.slice(0, 25);
+    // Create a Set from the filtered array
+    const unique = [...new Set(filtered)];
+    const filteredLimit = unique.slice(0, 25);
     await interaction.respond(filteredLimit.map(choice => ({ name: choice, value: choice })));
   }
 };
