@@ -1,4 +1,8 @@
 const {MessageEmbed} = require("discord.js");
+
+function normalizeJSDoc(str) {
+  return str.replace(/\{@link\s([^}]+)\}/g, "$1").replace("\n", " ");
+}
 function arraysToStr(arr, join=""){
   let str = "";
   arr.forEach(a => {
@@ -16,7 +20,7 @@ function normalizeStr(str) {
 }
 function buildGeneralEmbed(parent, meta) {
   let description = "";
-  if(parent.description) description += `**Description:** ${parent.description}`;
+  if(parent.description) description += `**Description:** ${normalizeJSDoc(parent.description)}`;
   if(parent.props.length) {
     description += "\n\n**Properties:**\n";
     parent.props.forEach((p, index)=> {
@@ -46,7 +50,7 @@ function buildGeneralEmbed(parent, meta) {
 
 function buildSpecificEmbed(parent, child, meta) {
   let description = "";
-  if(child.description) description += `**Description:** ${child.description}`;
+  if(child.description) description += `**Description:** ${normalizeJSDoc(child.description)}`;
   if(child.params?.length) {
     description += "\n\n**Parameters:**\n";
     child.params.forEach(p => {
@@ -73,3 +77,5 @@ function buildSpecificEmbed(parent, child, meta) {
 }
 
 module.exports = { buildGeneralEmbed, buildSpecificEmbed };
+
+
