@@ -48,29 +48,29 @@ function buildGeneralEmbed(parent, meta) {
   return embed;
 }
 
-function buildSpecificEmbed(data, meta) {
+function buildSpecificEmbed(parent, child, meta) {
   let description = "";
-  if(data.description) description += `**Description:** ${data.description}`;
-  if(data.params?.length) {
+  if(child.description) description += `**Description:** ${child.description}`;
+  if(child.params?.length) {
     description += "\n\n**Parameters:**\n";
-    data.params.forEach(p => {
+    child.params.forEach(p => {
       description += `- \`${p.name}\`(${removeLastChar(arraysToStr(p.type, "|"))})${p.description ? "\n" + p.description : ""}`;
     });
   }
-  if(data.returns?.length) {
+  if(child.returns?.length) {
     description += "\n**Returns:**\n";
-    description += arraysToStr(data.returns, "", "");
+    description += arraysToStr(child.returns, "", "");
   }
-  if(data.examples?.length) {
+  if(child.examples?.length) {
     description += "\n**Examples:**\n";
-    data.examples.forEach(e => {
+    child.examples.forEach(e => {
       description += `\`\`\`js\n${e}\n\`\`\``;
     });
   }
-  if(data.meta) description += `\n\n[Code source](${meta.github + data.meta.path + "/" + data.meta.file + "#L" + data.meta.line})`;
+  if(child.meta) description += `\n\n[Code source](${meta.github + child.meta.path + "/" + child.meta.file + "#L" + child.meta.line})`;
   description = normalizeStr(description);
   const embed = new MessageEmbed()
-    .setTitle(data.async ? `[async] ${data.name}` : data.name)
+    .setTitle(child.async ? `[async] ${parent.name + "#" + child.name}` : parent.name + "#" + child.name)
     .setColor(0x00AE86)
     .setDescription(description);
   return embed;

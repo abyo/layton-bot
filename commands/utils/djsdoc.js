@@ -44,7 +44,7 @@ module.exports = {
     case "method/prop": {
       const methorOrProp = djsutils.resolveMethodOrPropOrEvent(parent, query);
       if(!methorOrProp) return interaction.reply("Aucun résultat pour votre recherche");
-      const embed = djsutils.buildSpecificEmbed(methorOrProp, doc);
+      const embed = djsutils.buildSpecificEmbed(parent, methorOrProp, doc);
       interaction.reply({embeds:[embed]});
     }
       break;
