@@ -71,6 +71,24 @@ const djsdocs = [
     data: "",
     search: []
   },
+  {
+    name: "Rest/stable",
+    url: "https://raw.githubusercontent.com/discordjs/docs/main/rest/main.json",
+    github: "https://github.com/discordjs/discord.js/tree/stable/packages/rest",
+    branch : "stable",
+    doc: "https://discord.js.org/#/docs/rest/stable/",
+    data: "",
+    search: []
+  },
+  {
+    name: "Rest/main",
+    url: "https://raw.githubusercontent.com/discordjs/docs/main/rest/main.json",
+    github: "https://github.com/discordjs/discord.js/tree/main/packages/rest",
+    branch : "main",
+    doc: "https://discord.js.org/#/docs/rest/main/",
+    data: "",
+    search: []
+  },
   
 ];
 

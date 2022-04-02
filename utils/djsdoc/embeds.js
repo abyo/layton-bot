@@ -21,7 +21,7 @@ function normalizeStr(str) {
 function buildGeneralEmbed(parent, meta) {
   let description = "";
   if(parent.description) description += `**Description:** ${normalizeJSDoc(parent.description)}`;
-  if(parent.props.length) {
+  if(parent.props?.length) {
     description += "\n\n**Properties:**\n";
     parent.props.forEach((p, index)=> {
       description += `\`${p.name}\`${index+1 < parent.props.length ? "," : ""}`;
