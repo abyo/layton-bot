@@ -59,12 +59,16 @@ module.exports = {
       break;
     }
   },
-  async runAutocomplete(client, interaction,) {
+  async runAutocomplete(client, interaction) {
     const focusedOption = interaction.options.getFocused(true);
     const docName = interaction.options.getString("doc");
     const doc = client.constants.djsdocs.find((x) => x.name === docName);
     if(!doc) return;
-    const filtered = doc.search.filter(choice => choice.includes(focusedOption.value));
+    const filtered = [];
+    filtered.push(...doc.search.filter(choice => choice == focusedOption.value));
+    filtered.push(...doc.search.filter(choice => choice.startsWith(focusedOption.value)));
+
+    filtered.push(...doc.search.filter(choice => choice.includes(focusedOption.value)));
     const filteredLimit = filtered.slice(0, 25);
     await interaction.respond(filteredLimit.map(choice => ({ name: choice, value: choice })));
   }
