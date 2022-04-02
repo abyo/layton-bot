@@ -22,7 +22,6 @@ module.exports = {
     if(!parent) return interaction.reply("Aucun résultat pour votre recherche");
     switch (type) {
     case "method/prop": {
-      console.log(0);
       const methorOrProp = djsutils.resolveMethodOrProp(parent, query);
       const embed = djsutils.buildMethodOrPropEmbed(methorOrProp);
       interaction.reply({embeds:[embed]});
