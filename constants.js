@@ -35,7 +35,6 @@ const djsdocs = [
     data: "",
     search: []
   },
- 
   {
     name: "Builders/stable",
     url: "https://raw.githubusercontent.com/discordjs/docs/main/builders/main.json",
@@ -51,6 +50,24 @@ const djsdocs = [
     github: "https://github.com/discordjs/discord.js/tree/main/packages/builders",
     branch : "main",
     doc: "https://discord.js.org/#/docs/builders/main/",
+    data: "",
+    search: []
+  },
+  {
+    name: "Voice/stable",
+    url: "https://raw.githubusercontent.com/discordjs/docs/main/voice/main.json",
+    github: "https://github.com/discordjs/discord.js/tree/stable/packages/voice",
+    branch : "stable",
+    doc: "https://discord.js.org/#/docs/voice/stable/",
+    data: "",
+    search: []
+  },
+  {
+    name: "Voice/main",
+    url: "https://raw.githubusercontent.com/discordjs/docs/main/voice/main.json",
+    github: "https://github.com/discordjs/discord.js/tree/main/packages/voice",
+    branch : "main",
+    doc: "https://discord.js.org/#/docs/voice/main/",
     data: "",
     search: []
   },
