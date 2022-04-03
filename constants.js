@@ -20,7 +20,7 @@ const djsdocs = [
   {
     name: "Collection/stable",
     url: "https://raw.githubusercontent.com/discordjs/docs/main/collection/stable.json",
-    github: "https://github.com/discordjs/discord.js/tree/stable/",
+    github: "https://github.com/discordjs/collection/tree/stable/",
     branch: "stable",
     doc: "https://discord.js.org/#/docs/collection/stable/",
     data: "",
@@ -38,7 +38,7 @@ const djsdocs = [
   {
     name: "Builders/stable",
     url: "https://raw.githubusercontent.com/discordjs/docs/main/builders/stable.json",
-    github: "https://github.com/discordjs/discord.js/tree/stable/",
+    github: "https://github.com/discordjs/builders/tree/stable/src/",
     branch: "stable",
     doc: "https://discord.js.org/#/docs/builders/stable/",
     data: "",
@@ -56,7 +56,7 @@ const djsdocs = [
   {
     name: "Voice/stable",
     url: "https://raw.githubusercontent.com/discordjs/docs/main/voice/stable.json",
-    github: "https://github.com/discordjs/discord.js/tree/stable/",
+    github: "https://github.com/discordjs/voice/tree/stable/",
     branch: "stable",
     doc: "https://discord.js.org/#/docs/voice/stable/",
     data: "",

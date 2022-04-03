@@ -42,7 +42,7 @@ function buildGeneralEmbed(parent, meta) {
   if (parent.meta) description += `\n\n[Source code](${meta.github + parent.meta.path + "/" + parent.meta.file + "#L" + parent.meta.line})`;
   description = normalizeStr(description);
   const embed = new MessageEmbed()
-    .setAuthor({ name: parent.name, url: `${meta.doc}${parent.type}/${parent.name}`, iconURL: "https://cdn.discordapp.com/attachments/871732319449395240/959924116046090250/ezgif-5-73b32bedb6.png" })
+    .setAuthor({ name: meta.name + " - " +parent.name, url: `${meta.doc}${parent.type}/${parent.name}`, iconURL: "https://cdn.discordapp.com/attachments/871732319449395240/959924116046090250/ezgif-5-73b32bedb6.png" })
     .setDescription(description)
     .setColor(0x00AE86);
   return embed;
@@ -71,7 +71,7 @@ function buildSpecificEmbed(parent, child, meta) {
   description = normalizeStr(description);
   const embed = new MessageEmbed()
     //.setTitle(child.async ? `[async] ${parent.name + "#" + child.name}` : parent.name + "#" + child.name)
-    .setAuthor({ name: child.async ? `[async] ${parent.name + "#" + child.name}` : parent.name + "#" + child.name, url: `${meta.doc}${parent.type}/${parent.name}?scrollTo=${child.name}`, iconURL: "https://cdn.discordapp.com/attachments/871732319449395240/959924116046090250/ezgif-5-73b32bedb6.png" })
+    .setAuthor({ name: child.async ? `${meta.name + " - " + "[async] " +parent.name + "#" + child.name}` : meta.name + " - " + parent.name + "#" + child.name, url: `${meta.doc}${parent.type}/${parent.name}?scrollTo=${child.name}`, iconURL: "https://cdn.discordapp.com/attachments/871732319449395240/959924116046090250/ezgif-5-73b32bedb6.png" })
     .setColor(0x00AE86)
     .setDescription(description);
   return embed;
