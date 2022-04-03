@@ -20,7 +20,7 @@ const djsdocs = [
   {
     name: "Collection/stable",
     url: "https://raw.githubusercontent.com/discordjs/docs/main/collection/stable.json",
-    github: "https://github.com/discordjs/discord.js/tree/stable/",
+    github: "https://github.com/discordjs/collection/tree/stable/",
     branch: "stable",
     doc: "https://discord.js.org/#/docs/collection/stable/",
     data: "",
