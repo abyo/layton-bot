@@ -38,7 +38,7 @@ const djsdocs = [
   {
     name: "Builders/stable",
     url: "https://raw.githubusercontent.com/discordjs/docs/main/builders/stable.json",
-    github: "https://github.com/discordjs/discord.js/tree/stable/",
+    github: "https://github.com/discordjs/builders/tree/stable/src/",
     branch: "stable",
     doc: "https://discord.js.org/#/docs/builders/stable/",
     data: "",
