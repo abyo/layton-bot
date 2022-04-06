@@ -12,7 +12,9 @@ function arraysToStr(arr, join = "") {
       str += a + join;
     }
   });
-  return str.replaceAll(`${join}<`, "<").replaceAll(`<${join}`, "<").replaceAll(`${join}>`, ">").replaceAll(`>${join}`,">");
+  str = str.replaceAll(`${join}<`, "<").replaceAll(`<${join}`, "<").replaceAll(`${join}>`, ">").replaceAll(`>${join}`,">");
+  if(str.endsWith(join)) str = str.substring(0, str.length - join.length);
+  return str;
 }
 // function removeLastChar(str) {
 //   return str.substring(0, str.length - 1);
