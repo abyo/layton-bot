@@ -8,13 +8,15 @@ function arraysToStr(arr, join = "") {
   arr.forEach(a => {
     if (Array.isArray(a)) {
       str += arraysToStr(a, join);
-    } else str += a + join;
+    } else {
+      str += a + join;
+    }
   });
-  return str;
+  return str.replaceAll(`${join}<`, "<").replaceAll(`<${join}`, "<").replaceAll(`${join}>`, ">").replaceAll(`>${join}`,">");
 }
-function removeLastChar(str) {
-  return str.substring(0, str.length - 1);
-}
+// function removeLastChar(str) {
+//   return str.substring(0, str.length - 1);
+// }
 function normalizeStr(str) {
   return str.replace(/<info>|<\/info>/g, "");
 }
@@ -54,7 +56,7 @@ function buildSpecificEmbed(parent, child, meta) {
   if (child.params?.length) {
     description += "\n\n**Parameters:**\n";
     child.params.forEach(p => {
-      description += `- \`${p.name}\`(${removeLastChar(arraysToStr(p.type, "|"))})${p.description ? "\n" + p.description : ""}`;
+      description += `- \`${p.name}\`(${(arraysToStr(p.type, " | "))})${p.description ? "\n" + p.description : ""}`;
     });
   }
   if (child.returns?.length) {
