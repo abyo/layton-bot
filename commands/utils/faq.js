@@ -96,6 +96,12 @@ module.exports = {
           required: true,
           autocomplete:true,
         },
+        {
+          name: "member",
+          description: "Membre concerné par la faq.",
+          type: "USER",
+          required: true,
+        }
       ],
     },
     {
@@ -154,11 +160,17 @@ module.exports = {
     }
     case "show":{
       const name = interaction.options.getString("show")?.trim()?.toLowerCase();
+      const member = interaction.options.getMember("member", true);
+      if (!member)
+        return interaction.reply({
+          content: "Le membre n'a pas été trouvé!",
+          ephemeral: true,
+        });
       if(!name) return interaction.reply("Veuillez entrer un nom de tag.");
       if(!guildSettings.faq) return interaction.reply("Il n'y a pas de tags.");
       const faq = guildSettings.faq.find(faq => faq.name === name);
       if(!faq) return interaction.reply("Ce tag n'existe pas.");
-      interaction.reply(faq.content);
+      interaction.reply(`${member}, tu es probablement concerné par cette réponse:\n${faq.content}`);
       break;
     }
     case "list":{

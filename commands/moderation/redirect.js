@@ -25,6 +25,7 @@ module.exports = {
     const messageId = interaction.options.getString("messageid", true);
     const channel = interaction.options.getChannel("channel", true);
 
+    // TODO: move roles to the constant file
     // Server roles mapping
     // 858359095248683030 (divers-prog): /
     // 811944002424274974 (html-css): 812045425137549342
