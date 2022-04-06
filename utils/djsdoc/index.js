@@ -14,7 +14,10 @@ function fetchGithub(toFetch) {
   toFetch.forEach(async (f) => {
     const res = await axios.get(f.url);
     f.data = res.data;
-    f.search = getSearch(res.data);
+    const search = getSearch(res.data);
+    f.search = search[0];
+    f.classes = search[1];
+    f.typedefs = search[2];
   });
   Logger.info("Github fetched");
   return toFetch;
@@ -22,12 +25,15 @@ function fetchGithub(toFetch) {
 
 function getSearch(json) {
   const results = [];
+  const classes = [];
+  const typedefs = [];
   if (json.classes) {
     json.classes.forEach(c => {
       results.push(c.name);
       if (c.props) {
         c.props.forEach(p => {
           results.push(`${c.name}.${p.name}`);
+          classes.push(c.name);
         });
       }
       if (c.methods) {
@@ -44,6 +50,7 @@ function getSearch(json) {
     if (json.typedefs) {
       json.typedefs.forEach(c => {
         results.push(c.name);
+        typedefs.push(c.name);
         if (c.props) {
           c.props.forEach(p => {
             results.push(`${c.name}.${p.name}`);
@@ -52,7 +59,7 @@ function getSearch(json) {
       });
     }
   }
-  return results;
+  return [results, classes, typedefs];
 }
 
 module.exports = {

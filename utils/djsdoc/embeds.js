@@ -3,18 +3,27 @@ const { MessageEmbed } = require("discord.js");
 function normalizeJSDoc(str) {
   return str.replace(/\{@link\s([^}]+)\}/g, "$1").replace("\n", " ");
 }
-function arraysToStr(arr, join = "") {
+
+function arraysToStr(arr, join = "", meta) {
+  let str = runArrToStr(arr, join, meta);
+  str = str.replaceAll(`${join}<`, "<").replaceAll(`<${join}`, "<").replaceAll(`${join}>`, ">").replaceAll(`>${join}`,">").replaceAll("<", "\\<");
+  if(str.endsWith(join)) str = str.substring(0, str.length-join.length);
+  return str;
+}
+function runArrToStr(arr, join = "", meta){
   let str = "";
   arr.forEach(a => {
     if (Array.isArray(a)) {
-      str += arraysToStr(a, join);
-    } else str += a + join;
+      str += runArrToStr(a, join, meta);
+    } else {
+      if(meta && meta.classes.includes(a)) str += `[${a}](${meta.doc}class/${a})` + join;
+      else if(meta && meta.typedefs.includes(a)) str += `[${a}](${meta.doc}typedef/${a})` + join;
+      else str += a + join;
+    }
   });
   return str;
 }
-function removeLastChar(str) {
-  return str.substring(0, str.length - 1);
-}
+
 function normalizeStr(str) {
   return str.replace(/<info>|<\/info>/g, "");
 }
@@ -24,19 +33,19 @@ function buildGeneralEmbed(parent, meta) {
   if (parent.props?.length) {
     description += "\n\n**Properties:**\n";
     parent.props.forEach((p, index) => {
-      description += `\`${p.name}\`${index + 1 < parent.props.length ? "," : ""}`;
+      description += `\`${p.name}\`${index + 1 < parent.props.length ? ", " : ""}`;
     });
   }
   if (parent.methods?.length) {
     description += "\n\n**Methods:**\n";
     parent.methods.forEach((m, index) => {
-      description += `\`${m.name}\`${index + 1 < parent.methods.length ? "," : ""}`;
+      description += `\`${m.name}\`${index + 1 < parent.methods.length ? ", " : ""}`;
     });
   }
   if (parent.events?.length) {
     description += "\n\n**Events:**\n";
     parent.events.forEach((e, index) => {
-      description += `\`${e.name}\`${index + 1 < parent.events.length ? "," : ""}`;
+      description += `\`${e.name}\`${index + 1 < parent.events.length ? ", " : ""}`;
     });
   }
   if (parent.meta) description += `\n\n[Source code](${meta.github + parent.meta.path + "/" + parent.meta.file + "#L" + parent.meta.line})`;
@@ -54,7 +63,7 @@ function buildSpecificEmbed(parent, child, meta) {
   if (child.params?.length) {
     description += "\n\n**Parameters:**\n";
     child.params.forEach(p => {
-      description += `- \`${p.name}\`(${removeLastChar(arraysToStr(p.type, "|"))})${p.description ? "\n" + p.description : ""}`;
+      description += `- \`${p.name}\` ${(arraysToStr(p.type, " | ", meta))} ${p.description ? "\n" + p.description : ""}`;
     });
   }
   if (child.returns?.length) {
