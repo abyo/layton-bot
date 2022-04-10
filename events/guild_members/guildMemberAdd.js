@@ -14,13 +14,13 @@ module.exports = {
       .setColor("#21ff81")
       .setDescription(
         `± Nom d'utilisateur: ${member}
-      ± Créé le: <t:${parseInt(
+± Créé le: <t:${parseInt(
     member.user.createdTimestamp / 1000
   )}:f> (<t:${parseInt(member.user.createdTimestamp / 1000)}:R>)
-      ± Rejoint le: <t:${parseInt(
+± Rejoint le: <t:${parseInt(
     member.joinedTimestamp / 1000
   )}:f> (<t:${parseInt(member.joinedTimestamp / 1000)}:R>)
-      `
+`
       )
       .setTimestamp()
       .setFooter({ text: "L'utilisateur a rejoint!" });
