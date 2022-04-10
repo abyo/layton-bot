@@ -60,6 +60,7 @@ module.exports = {
     userArray.push(user);
     await client.updateGuild(interaction.guild, { users: userArray });
 
+    // TODO: leave a message for when the user is warned
     const logChannel = client.channels.cache.get(guildSettings.modChannel);
     logChannel.send({ embeds: [embed] });
 

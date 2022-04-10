@@ -6,7 +6,9 @@ const djsdocs = [
     branch: "stable",
     doc: "https://discord.js.org/#/docs/discord.js/stable/",
     data: "",
-    search: []
+    search: [],
+    classes: [],
+    typedefs: [],
   },
   {
     name: "Discord.js/main",
@@ -15,7 +17,9 @@ const djsdocs = [
     branch: "main",
     doc: "https://discord.js.org/#/docs/discord.js/main/",
     data: "",
-    search: []
+    search: [],
+    classes: [],
+    typedefs: [],
   },
   {
     name: "Collection/stable",
@@ -24,7 +28,9 @@ const djsdocs = [
     branch: "stable",
     doc: "https://discord.js.org/#/docs/collection/stable/",
     data: "",
-    search: []
+    search: [],
+    classes: [],
+    typedefs: [],
   },
   {
     name: "Collection/main",
@@ -33,7 +39,9 @@ const djsdocs = [
     branch: "main",
     doc: "https://discord.js.org/#/docs/collection/main/",
     data: "",
-    search: []
+    search: [],
+    classes: [],
+    typedefs: [],
   },
   {
     name: "Builders/stable",
@@ -42,7 +50,9 @@ const djsdocs = [
     branch: "stable",
     doc: "https://discord.js.org/#/docs/builders/stable/",
     data: "",
-    search: []
+    search: [],
+    classes: [],
+    typedefs: [],
   },
   {
     name: "Builders/main",
@@ -51,7 +61,9 @@ const djsdocs = [
     branch: "main",
     doc: "https://discord.js.org/#/docs/builders/main/",
     data: "",
-    search: []
+    search: [],
+    classes: [],
+    typedefs: [],
   },
   {
     name: "Voice/stable",
@@ -60,7 +72,9 @@ const djsdocs = [
     branch: "stable",
     doc: "https://discord.js.org/#/docs/voice/stable/",
     data: "",
-    search: []
+    search: [],
+    classes: [],
+    typedefs: [],
   },
   {
     name: "Voice/main",
@@ -69,7 +83,9 @@ const djsdocs = [
     branch: "main",
     doc: "https://discord.js.org/#/docs/voice/main/",
     data: "",
-    search: []
+    search: [],
+    classes: [],
+    typedefs: [],
   },
   {
     name: "Rest/main",
@@ -78,7 +94,9 @@ const djsdocs = [
     branch: "main",
     doc: "https://discord.js.org/#/docs/rest/main/",
     data: "",
-    search: []
+    search: [],
+    classes: [],
+    typedefs: [],
   },
 ];
 
