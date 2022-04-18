@@ -52,6 +52,7 @@ module.exports = {
       )
       .setTimestamp();
 
+    interaction.channel.send(`${member.user} a été démute.`);
     await logChannel.send({ embeds: [embed] });
     await interaction.reply({
       content: `Le membre ${member} a été démute!`,
