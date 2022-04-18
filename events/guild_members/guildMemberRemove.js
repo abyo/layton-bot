@@ -14,13 +14,13 @@ module.exports = {
       .setColor("#dc143c")
       .setDescription(
         `± Nom d'utilisateur: ${member.displayName}
-      ± Créé le: <t:${parseInt(
+± Créé le: <t:${parseInt(
     member.user.createdTimestamp / 1000
   )}:f> (<t:${parseInt(member.user.createdTimestamp / 1000)}:R>)
-      ± Rejoint le: <t:${parseInt(
+± Rejoint le: <t:${parseInt(
     member.joinedTimestamp / 1000
   )}:f> (<t:${parseInt(member.joinedTimestamp / 1000)}:R>)
-      ± Quitté le: <t:${parseInt(Date.now() / 1000)}:f> (<t:${parseInt(
+± Quitté le: <t:${parseInt(Date.now() / 1000)}:f> (<t:${parseInt(
   Date.now() / 1000
 )}:R>)
       `
