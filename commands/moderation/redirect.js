@@ -91,7 +91,7 @@ module.exports = {
       }
     }
 
-    message.channel.send(`${message.author} votre message à été redirigé vers le salon ${channel}. Le role correspondant au salon vous a été attribué!`);
+    message.channel.send(`${message.author} votre message a été redirigé vers le salon ${channel}. Le rôle correspondant au salon vous a été attribué!`);
     message.delete()
       .then(() => {
         channel.send({ content: `\`Message de ${message.author.tag} redirigé:\`\n${message.content}`, files: files.length > 0 ? files : undefined });
