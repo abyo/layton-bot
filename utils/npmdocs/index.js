@@ -37,7 +37,7 @@ async function fetchPackage(name) {
   }
 }
 function trimstr(arr) {
-  if (arr.length > 20) arr = arr.slice(20) + "..."
+  if (arr.length > 20) arr = arr.slice(0, 20) + "..."
   return arr;
 }
 async function buildEmbed(data) {
