@@ -31,10 +31,6 @@ module.exports = {
                     value: 'dev'
                 },
                 {
-                    name: 'Blague 18+',
-                    value: '18+'
-                },
-                {
                     name: 'Blague beauf',
                     value: 'beauf'
                 },
@@ -56,7 +52,11 @@ module.exports = {
 
         switch (interaction.options.getString('type')) {
             case 'random':
-                let blagueRan = await jokeAPI.random();
+                let blagueRan = await jokeAPI.random({
+                    disallow: [
+                      blagues.categories.LIMIT
+                    ]
+                  });
                 type = blagueRan.type;
                 joke = blagueRan.joke;
                 answer = blagueRan.answer;
@@ -87,15 +87,6 @@ module.exports = {
                 type = blagueDev.type;
                 joke = blagueDev.joke;
                 answer = blagueDev.answer;
-                break;
-
-            case '18+':
-                let blague18 = await jokeAPI.randomCategorized(
-                    jokeAPI.categories.LIMIT
-                );
-                type = blague18.type;
-                joke = blague18.joke;
-                answer = blague18.answer;
                 break;
 
             case 'beauf':
