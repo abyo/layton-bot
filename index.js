@@ -18,6 +18,8 @@ const client = new Client({
 });
 
 require("./utils/Functions")(client);
+require("./utils/ClonedProfiles")(client);
+
 
 client.constants = require("./constants");
 
@@ -53,5 +55,9 @@ mongoose
   });
 
 client.constants.djsdocs = fetchGithub(client.constants.djsdocs);
-setInterval(() => client.constants.djsdocs = fetchGithub(client.constants.djsdocs), 1000 * 60 * 60 * 24);
+client.updateBlockedUsers();
+setInterval(() => {
+  client.constants.djsdocs = fetchGithub(client.constants.djsdocs);
+  client.updateBlockedUsers();
+}, 1000 * 60 * 60 * 24);
 client.login(process.env.DISCORD_TOKEN);
