@@ -1,5 +1,5 @@
 const axios = require("axios");
-const { } = require("discord.js");
+const Logger = require("./Logger");
 
 function getClonedReadMe() {
   return axios.get("https://api.github.com/search/code?q=%3Ca+href%3D%22https%3A%2F%2Fgithub.com%2Fabyo%22%3E", { headers: { Authorization: `Token ${process.env.GITHUB_TOKEN}` } })
@@ -22,7 +22,7 @@ function modifyAutomodRuleForGuild(guildId, ruleId, rule) {
 }
 
 module.exports = (client) => {
-  client.updateBlockedUsers = async (client) => {
+  client.updateBlockedUsers = async () => {
     try {
       const blockedUsers = await getClonedReadMe()
       const blockRegex = `github.com/(${blockedUsers.join("|")})\\S*`
@@ -38,9 +38,7 @@ module.exports = (client) => {
         }, {
           type: 2,  // Send alert to #hangout
           metadata: {
-            // channel_id: "812401257909190667"
-            channel_id: "1030388039316406292"
-
+            channel_id: process.env.HANGOUT_CHANNEL
           }
         }],
         enabled: true,
@@ -48,15 +46,15 @@ module.exports = (client) => {
       };
       const automodRules = await listAutomodRulesForGuild(process.env.GUILD_ID);
       const existingRule = automodRules.data.find(x => x.name === blockClonedProfilesRule.name && x.creator_id === client.user.id);
-      if (!!existingRule && existingRule.trigger_metadata.regex_patterns[0] !== blockRegex) {
-        console.log("updating existing rule");
+      if (!!existingRule) {
+        Logger.info("Updating Automod rule");
         modifyAutomodRuleForGuild(process.env.GUILD_ID, existingRule.id, { trigger_metadata: { regex_patterns: [blockRegex] } })
       } else {
-        console.log("creating new rule");
+        Logger.info("Creating Automod rule");
         createAutomodRuleForGuild(process.env.GUILD_ID, JSON.stringify(blockClonedProfilesRule))
       }
     } catch (err) {
-      console.error(err.response)
+      console.error(err)
     }
   }
 
