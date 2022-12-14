@@ -2,6 +2,7 @@ const axios = require("axios");
 const Logger = require("./Logger");
 
 function getClonedReadMe() {
+  if(!process.env.GITHUB_TOKEN) throw new Error("GITHUB_TOKEN is not set in .env file");
   return axios.get("https://api.github.com/search/code?q=%3Ca+href%3D%22https%3A%2F%2Fgithub.com%2Fabyo%22%3E", { headers: { Authorization: `Token ${process.env.GITHUB_TOKEN}` } })
     .then((res) => res.data.items.filter((x) => x.repository.owner.login !== "abyo").map(x => x.repository.owner.login))
     .catch((err) => {
@@ -54,7 +55,7 @@ module.exports = (client) => {
         createAutomodRuleForGuild(process.env.GUILD_ID, JSON.stringify(blockClonedProfilesRule));
       }
     } catch (err) {
-      console.error(err);
+      Logger.error(err);
     }
   };
 };
