@@ -1,6 +1,8 @@
 const { MessageEmbed } = require("discord.js");
 const ms = require("ms");
-
+const maxTime = 1000 * 60 * 60 * 24 * 27; // Discord bloque normalement à 28 jours mais malheureusement 
+// impossible de réaliser un essai concluant. 
+// Pour éviter tout problème on limite ici à 27 jours.
 module.exports = {
   name: "mute",
   category: "moderation",
@@ -51,6 +53,12 @@ module.exports = {
         content: "Spécifier une durée valable!",
         ephemeral: true,
       });
+    if (convertedTime > maxTime) {
+      return interaction.reply({
+        content: `La durée maximale est de ${ms(maxTime)}, réessayez de </${interaction.commandName}:${interaction.commandId}> avec une durée plus courte`,
+        ephemeral: true,
+      });
+    }
 
     const embed = new MessageEmbed()
       .setAuthor({
@@ -65,12 +73,12 @@ module.exports = {
       )
       .setTimestamp();
 
+    await member.timeout(convertedTime, reason);
     interaction.channel.send(`${member} a été mute pour la raison suivante: ${reason} (${duration})`);
     await logChannel.send({ embeds: [embed] });
     await interaction.reply({
       content: `Le membre ${member} a été mute pour ${duration} car ${reason}!`,
       ephemeral: true,
     });
-    await member.timeout(convertedTime, reason);
   },
 };
